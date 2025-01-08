@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% load static%}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de productos</title>
+    <link rel="stylesheet" href="/static/administd/lista_producto.css">
+    
+
+    <h1>Lista de productos</h1>
+    <table>
+        <div class="tabla">
+            <tr>
+                <th>Nombre</th>
+                <th>Categoria</th>
+                <th>Precio</th>
+                <th colspan="2">Opciones</th>
+                
+            </tr>
+        <tr>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.precio }}</td>
+                <td><button>Actualizar</button></td>
+                <td><button>Eliminar</button></td>
+            </tr>
+        {% endfor %}
+        
+        </div>
+    
+    </table>
+{% endblock %}
+    

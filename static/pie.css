@@ -1,0 +1,107 @@
+
+/*Estilos para el pie de pagina */
+
+
+.pie_pagina {
+  background-color: #000000;
+  padding: 10px;
+  margin-top: 20px;
+  height: 50px;
+  position: absolute;
+  margin-bottom: 0;
+  width: 100%;
+
+}
+.pie_pagina{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+a{
+  margin-bottom: 0;
+  text-decoration: none;
+  color: black;
+}
+.conten-pie .boton{
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  float: left;
+  margin-top: 0 10px;
+  overflow: hidden;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+ background-color: #ffffff;
+ margin: 5px;
+}
+
+.ico i{
+  font-size: 35px;
+}
+.ico{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#fat{
+  padding: 2px;
+}
+#inst{
+  padding: 2px;
+  
+}
+
+.boton:hover{
+  transform: translateY(-25%);
+  color: rgb(24.71%, 44.71%, 60.78%) ;
+}
+
+#what:hover{
+  color: #25D366 ;
+}
+
+#inst:hover{
+  color: #3f729b;
+ 
+}
+
+#fat:hover{
+  color: #3b5998 ;
+}
+
+.informacion{
+    font-size: 17Px;
+    background-color: #ffffff;
+    float: right;
+    border: 1px solid black;
+    border-radius: 50px;
+    margin-right: 20px;
+    margin-top: -7px;
+    padding: 5px;
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+    color: #000000;
+    
+}
+.informacion:hover{
+  transform: translateY(-25%);
+  background-color: #000000;
+  color: #ffffff;
+}
+ .RC{
+  text-align: center;
+  color: #000000;
+  
+ }
+
+.informacion{
+  margin: 0;
+
+  }
+
+.informacion_empresa{
+  padding-top: 10px;
+  color: #ffffff;
+  margin: 0;
+}

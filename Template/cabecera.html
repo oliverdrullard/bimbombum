@@ -1,0 +1,49 @@
+{% load static %}
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/cabecera.css">
+
+    <div id="elederecha">
+        <a href="agregar_cuenta.html">
+            <i class="fa-solid fa-magnifying-glass"></i> 
+        </a>
+        <a href="{% url 'registro'%}">
+            <i class="fa-solid fa-user"></i>
+        </a>
+        <a href="{% url 'carrito'%}">
+            <i class="fa-solid fa-cart-plus"></i>
+            
+        </a>
+    </div>
+    <div id="eleIzquierda">
+        <a href="{% url 'lista_megusta'%}">
+            <i class="fa-solid fa-heart"></i>
+            
+        <a href="{% url 'pantallaMensajes'%}">
+            <i class="fa-regular fa-message"></i>
+        </a>
+        <a href="">
+            <i class="fa-solid fa-truck-fast"></i>
+            
+        </a>
+        
+    </div>
+    
+    <div id="logo" class="nombre">
+        <a href="{% url 'cardprincipal'%}">
+            <img class="logo" src="/static/logos/Blou mmm.jpeg" alt="logo">
+            <h2 class="titulo">BIM,BOM,BUM!</h2>
+        </a>
+    </div>
+</header>
+<hr>
+<nav>
+    <div class="navegacion">
+        <a href="{% url 'cardmujeres' %}" class="mujer" di="navegacion_2">MUJER</a>
+        <a href="{% url 'cardhombres' %}" class="hombre">HOMBRE</a>
+        <a href="{% url 'cardniños' %}"  class="niños">NIÑOS/A</a>
+        <a href="{% url 'cardcosmeticos' %}"  class="cosmeticos">COSMETICOS</a>
+        <a href="{% url 'cardhogar' %}"  class="hogar">HOGAR</a>
+    </div>
+</nav><br>

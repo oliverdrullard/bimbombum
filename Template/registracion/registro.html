@@ -1,0 +1,43 @@
+{% extends "app.html"%}
+{% load static %}
+
+    {% block content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/registro.css">
+
+    <form class="formulario" method="post" enctype="multipart/form-data" action="{% url 'cardprincipal' %}"> 
+        {% csrf_token %}
+        <h1>Registrate</h1>
+        <div class="contenedor__registro">
+            <div class="input-contenedor">
+                <i class="fas fa-user icon" ></i>
+                {{ form.nombre }}
+            </div>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-envelope icon"></i>
+                {{ form.email }}
+            </div>
+            <div class="input-contenedor" >
+                <i class="fa-solid fa-lock icon"></i>
+                {{ form.password1 }}
+            </div>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-lock icon"></i>
+                {{ form.password2 }}
+            </div>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-house icon"></i>
+                {{ form.direccion }}
+            </div>
+            <div class="input-contenedor">
+                <i class="fa-regular fa-credit-card icon"></i>
+                {{ form.formato_pago }}
+            </div>
+            <button type="submit" value="Registrate" class="button">Registar</button>
+            <P>Al registrarte, aceptas los terminos y condiciones</P>
+            <p>¿Ya tienes una cuenta?<a class="link" href="{% url 'login'%}">Inicar sesion</a></p>
+
+        </div>
+    </form>
+
+    {% endblock%}

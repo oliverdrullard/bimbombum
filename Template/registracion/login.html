@@ -1,0 +1,31 @@
+{% extends "app.html"%}
+{% load static %}
+    
+<form method="post" action="{% url 'login' %}"></form>
+
+
+    {% block content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/login.css">
+    
+    <form class="formulario" action="{% url 'login' %}" method="post"> 
+        {% csrf_token %}
+        <h1>Login</h1>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-envelope icon"></i>
+                <input class="campo_informacion"type="email" placeholder="Email ">
+            </div>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-lock icon"></i>
+                <input class="campo_informacion"  type="password" placeholder="Contreseña ">
+            </div>
+            
+            <button type="submit" value="Registrate" class="button">Iniciar sesión</button>
+            <P>Al registrarte, aceptas los terminos y condiciones</P>
+            <p>¿No tienes una cuenta? <a class="link" href="{% url 'registro'%}">Crear una cuenta</a></p>
+
+        </div>
+    </form>
+    
+      
+    {% endblock %}

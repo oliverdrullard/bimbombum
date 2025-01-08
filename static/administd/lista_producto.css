@@ -1,0 +1,22 @@
+body{
+    background-color: #b3b3b3;
+}
+
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse ;
+    padding: 10px;
+    text-align: center;
+
+}
+
+table{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+}
+
+h1{
+    text-align: center;
+    margin-top: 10px;
+}

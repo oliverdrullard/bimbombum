@@ -1,0 +1,174 @@
+/*Estilos generales para tener una mejor presicion con las medidas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+/*color de fondo de la pagina*/
+body {
+   /*background-image: url(Recursos/imgenFondo.jpg);*/ 
+   
+}
+
+.filter {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    background-color: 243, 243, 243, 0.2;
+}
+hr{
+    color: #000000;
+    
+}
+
+/*estilos para los en laces */
+a {
+    text-decoration: none;
+
+
+}
+
+.logosInicio {
+    width: 40px;
+    border-radius: 5px;
+    padding: 5px;
+    
+}
+
+#eleIzquierda {
+    float: left;
+    padding: 10px;
+    text-decoration: none;
+    margin-left: 15px;
+
+
+}
+
+#elederecha {
+    float: right;
+    padding: 10px;
+    margin-right: 15px;
+
+
+}
+
+.logosInicio:hover {
+    background-color: #c9c9c9;
+    border-radius: 5px;
+
+}
+
+/*Estilos para el logo de la pagina*/
+.nombre {
+    display: grid;
+    place-items: center;
+
+}
+
+.logo {
+    width: 250px;
+    margin-top: 10px;
+
+
+}
+
+hr {
+    margin-top: 20px;
+
+}
+
+.titulo {
+    color: #000000;
+    text-align: center;
+}
+
+/*Estilos para la navegacion*/
+
+.navegacion {
+    margin-top: 10px;
+    margin-left: 200px;
+   
+   
+    
+
+
+}
+
+.navegacion a {
+    padding-left: 75px;
+    padding-right: 75px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #000000;
+    padding-top: 5px;
+    transition: all 400ms ease;
+    padding-bottom: 5px;
+    
+
+
+}
+
+.navegacion a:hover {
+    border: 1px solid black;
+    background-color: #ffffff	;
+    color: #000000;
+    font-size: 15px;
+}
+
+
+
+/*estilos para los en laces */
+a {
+    text-decoration: none;
+
+
+}
+
+.Encabezado {
+    width: 40px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#eleIzquierda {
+    float: left;
+    padding: 10px;
+    text-decoration: none;
+    margin-left: 15px;
+
+
+}
+#eleIzquierda a i{
+    font-size: 25px;
+    padding:10px;
+}
+
+#elederecha {
+    float: right;
+    padding: 10px;
+    margin-right: 15px;
+
+
+}
+#elederecha a i{
+    font-size: 25px;
+    padding:10px;
+}
+#elederecha a i:hover,#eleIzquierda a i:hover{
+    background-color: #c9c9c9;
+    border-radius: 30px;
+    transition: all 400ms ease;
+}
+
+a i{
+    margin-left: 2px;
+    font-size: 25px;
+    color: #000000;
+    float: left;
+   
+    
+
+
+}

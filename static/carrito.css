@@ -1,0 +1,76 @@
+/*seccion de la ropa*/
+
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin-top: 40px;
+    margin-left: 250px ;
+  }
+  
+  .card{
+    width: 10rem;
+    margin: 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: all 400ms ease;
+  }
+  
+  .card:hover{
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.4);
+    transform: translateY(-5%);
+  }
+  
+  figure img {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 10px;
+  
+  }
+
+  i{
+    transition: all 400ms ease;
+  }
+
+.card .fa-heart:hover {
+  color: #ff0000;
+  font-size: 20px;
+  transition: all 400ms ease;
+  
+
+}
+
+.card .fa-heart:active {
+  color: #ff0000;
+  font-size: 20px;
+  transition: all 400ms ease;
+  
+
+}
+
+.card .fa-cart-shopping:hover{
+  color: #0485FD;
+  font-size: 20px;
+  transition: all 400ms ease;
+}
+
+#pie{
+  width: 100% m !important;
+  height: 50px;
+
+}
+
+.titulo_megusta{
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 30px;
+
+}
+
+.contenedor_titulo{
+    margin-left: 500px;
+    margin-right: 500px;
+}
