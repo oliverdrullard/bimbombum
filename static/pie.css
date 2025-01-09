@@ -10,6 +10,8 @@
   position: absolute;
   margin-bottom: 0;
   width: 100%;
+  
+  
 
 }
 .pie_pagina{
@@ -21,6 +23,9 @@ a{
   margin-bottom: 0;
   text-decoration: none;
   color: black;
+}
+.conten-pie{
+  
 }
 .conten-pie .boton{
   display: inline-block;
