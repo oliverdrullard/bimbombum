@@ -10,8 +10,48 @@
   position: absolute;
   margin-bottom: 0;
   width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 
 }
+/* Contenedor de las redes sociales */
+.redes_sociales_padre{
+ margin-right: auto;
+ display: flex;
+
+}
+.boton{
+  margin-left: 10px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: all 0.3s ease-out;
+}
+
+/* contenedor Quienes somos */
+.quienes_somos{
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 50px;
+  padding: 5px;
+  background-color: #ffffff;
+  transition: all 0.3s ease-out;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.quienes_somos{
+  padding-bottom: 0px;
+}
+
+
+
 .pie_pagina{
   position: absolute;
   bottom: 0;
@@ -22,19 +62,7 @@ a{
   text-decoration: none;
   color: black;
 }
-.conten-pie .boton{
-  display: inline-block;
-  height: 40px;
-  width: 40px;
-  float: left;
-  margin-top: 0 10px;
-  overflow: hidden;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease-out;
- background-color: #ffffff;
- margin: 5px;
-}
+
 
 .ico i{
   font-size: 35px;
@@ -70,35 +98,13 @@ a{
   color: #3b5998 ;
 }
 
-.informacion{
-    font-size: 17Px;
-    background-color: #ffffff;
-    float: right;
-    border: 1px solid black;
-    border-radius: 50px;
-    margin-right: 20px;
-    margin-top: -7px;
-    padding: 5px;
-    transition: all 0.3s ease-out;
-    text-decoration: none;
-    color: #000000;
-    
-}
-.informacion:hover{
+
+.quienes_somos:hover{
   transform: translateY(-25%);
-  background-color: #000000;
-  color: #ffffff;
+  /* background-color: #000000; */
 }
- .RC{
-  text-align: center;
-  color: #000000;
-  
- }
 
-.informacion{
-  margin: 0;
 
-  }
 
 .informacion_empresa{
   padding-top: 10px;

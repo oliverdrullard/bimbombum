@@ -3,7 +3,8 @@
 <link rel="stylesheet" href="/static/pie.css">
 
     <footer id="pie" class="pie_pagina">
-        <div class="conten-pie">
+        
+        <div class="redes_sociales_padre">
             <div class="boton" >
                 <div class="ico">
                     <a target="_blank" href="https://facebook.com/">
@@ -27,12 +28,15 @@
                     </a>
                 </div>
             </div>
-            
         </div>
-        <a href="{% url 'quienes_somos'%}" class="inform">
-            <p class="informacion">Quienes somos</p>
-        </a>
-        <a target="_blank" href="" class="RC">
-            <p class="informacion_empresa">© Copyright BIMBOMBUM 2023</p>
-       </a>
+            
+        
+            <p class="informacion_empresa"> &copy; Copyright BIMBOMBUM 2023</p>
+        
+
+        <div class="quienes_somos">
+            <a href="{% url 'quienes_somos'%}" class="inform">
+                Quienes somos
+            </a>
+        </div>
     </footer>
