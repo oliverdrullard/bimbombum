@@ -10,11 +10,16 @@
   position: absolute;
   margin-bottom: 0;
   width: 100%;
+<<<<<<< HEAD
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
 
+=======
+  
+  
+>>>>>>> problemascss
 
 }
 /* Contenedor de las redes sociales */
@@ -62,7 +67,26 @@ a{
   text-decoration: none;
   color: black;
 }
+<<<<<<< HEAD
 
+=======
+.conten-pie{
+  
+}
+.conten-pie .boton{
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  float: left;
+  margin-top: 0 10px;
+  overflow: hidden;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+ background-color: #ffffff;
+ margin: 5px;
+}
+>>>>>>> problemascss
 
 .ico i{
   font-size: 35px;

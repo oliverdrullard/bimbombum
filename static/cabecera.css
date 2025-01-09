@@ -85,16 +85,6 @@ hr {
 
 /*Estilos para la navegacion*/
 
-.navegacion {
-    margin-top: 10px;
-    margin-left: 200px;
-   
-   
-    
-
-
-}
-
 .navegacion a {
     padding-left: 75px;
     padding-right: 75px;
@@ -115,10 +105,16 @@ hr {
     color: #000000;
     font-size: 15px;
 }
+.nav_menu{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+}
 
 
-
-/*estilos para los en laces */
+/*estilos para los enlaces */
 a {
     text-decoration: none;
 
