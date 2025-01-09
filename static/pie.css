@@ -10,16 +10,11 @@
   position: absolute;
   margin-bottom: 0;
   width: 100%;
-<<<<<<< HEAD
+
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-
-=======
-  
-  
->>>>>>> problemascss
 
 }
 /* Contenedor de las redes sociales */
@@ -67,9 +62,6 @@ a{
   text-decoration: none;
   color: black;
 }
-<<<<<<< HEAD
-
-=======
 .conten-pie{
   
 }
@@ -86,7 +78,7 @@ a{
  background-color: #ffffff;
  margin: 5px;
 }
->>>>>>> problemascss
+
 
 .ico i{
   font-size: 35px;
