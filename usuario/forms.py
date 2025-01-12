@@ -18,11 +18,18 @@ class UsuarioRegistroForm(UserCreationForm):
             'nombre':forms.TextInput(attrs={'class':'campo_informacion', 'placeholder':'Nombre'}),
             'formato_pago':forms.TextInput(attrs={'class':'campo_informacion', 'placeholder':'Formato de pago'}),
             'direccion':forms.TextInput(attrs={'class':'campo_informacion', 'placeholder':'Direccion'}),
-            'password1':forms.PasswordInput(attrs={'class':'campo_informacion', 'placeholder':'Contraceña'}),
-            'password2':forms.PasswordInput(attrs={'class':'campo_informacion', 'placeholder':'Confirmacion de contraceña'}),
 
         }
-
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password1'].widget = forms.PasswordInput(attrs={
+            'class':'campo_informacion',
+            'placeholder': 'Contraseña'
+        })
+        self.fields['password2'].widget = forms.PasswordInput(attrs={
+            'class': 'campo_informacion', 
+            'placeholder': 'Confirmación de contraseña'
+        })
 
 class UsuarioLoginForm(forms.Form):
 
