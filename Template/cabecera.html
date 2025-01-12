@@ -5,9 +5,17 @@
     <link rel="stylesheet" href="/static/cabecera.css">
 
     <div id="elederecha">
-        <a href="agregar_cuenta.html">
-            <i class="fa-solid fa-magnifying-glass"></i> 
-        </a>
+        <form action="">
+            <div class="buscador">
+                <button class="boton_buscar" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i> 
+                </button>
+                <input type="text" name="buscar" id="buscar" class="input_buscador">
+                
+                
+            </div>
+           
+        </form>
         <a href="{% url 'registro'%}">
             <i class="fa-solid fa-user"></i>
         </a>
