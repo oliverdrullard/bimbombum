@@ -18,32 +18,42 @@ class UsuarioRegistro(View):
 
     def post(self, request):
         form = UsuarioRegistroForm(request.POST, request.FILES)
-        email = request.POST.get('email')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
+        if form.is_valid():
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
 
-        if password1 != password2:
-            return render(request, 'registracion/registro.html', {'error': 'Las contraseñas no coinciden'})
+            if password1 != password2:
+                return render(request, 'registracion/registro.html', {'form': form, 'error': 'Las contraseñas no coinciden'})
 
-        user = ModeloUsuario.objects.create_user(
-            email=email, password1=password1)
-        return redirect('cardprincipal')
+            user = ModeloUsuario.objects.create_user(
+                email=form.cleaned_data['email'],
+                password=password1,
+                nombre=form.cleaned_data['nombre'],
+                direccion=form.cleaned_data['direccion'],
+                formato_pago=form.cleaned_data['formato_pago']
+            )  
+            return redirect('cardprincipal')
+        return render(request, 'registracion/registro.html', {'form': form, 'error': 'Datos inválidos'})
 
 
 class UsuarioLoginView(View):
     def get(self, request):
+        form = UsuarioLoginForm()
         return render(request, 'registracion/login.html')
 
     def post(self, request):
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('cardprincipal')
-        else:
-            return render(request, 'registracion/login.html', {'error': 'Email o contraseña inválidos'})
-
+        form = UsuarioLoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password1']
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('cardprincipal')
+            else:
+                return render(request, 'registracion/login.html', {'error': 'Email o contraseña inválidos'})
+        return render(request, 'registracion/login.html', {'form': form, 'error': 'Datos inválidos'})
+        
 
 class inicio_view(View):
     def get(self, request):

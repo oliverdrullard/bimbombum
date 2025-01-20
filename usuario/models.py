@@ -19,30 +19,30 @@ class UsuarioManager(BaseUserManager):
 class ModeloUsuario(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     nombre = models.CharField(max_length=100, default='')
-    password1 = models.CharField(max_length=100, default='')
-    password2 = models.CharField(max_length=128, null=False, default='password')
     direccion = models.CharField(max_length=100, null=False, default='')
     formato_pago = models.CharField(max_length=100, default='')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
     objects = UsuarioManager()
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email
     
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    password1 = models.CharField(max_length=100)
-    password2 = models.CharField(max_length=100)
-    direccion = models.CharField(max_length=100)
-    formato_pago = models.CharField(max_length=100)
+# class Usuario(models.Model):
+#     id_usuario = models.AutoField(primary_key=True)
+#     nombre = models.CharField(max_length=100)
+#     email = models.CharField(max_length=100)
+#     password1 = models.CharField(max_length=100)
+#     password2 = models.CharField(max_length=100)
+#     direccion = models.CharField(max_length=100)
+#     formato_pago = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.nombre
+#     def __str__(self):
+#         return self.nombre
     
 class Puesto(models.Model):
     id_puesto = models.AutoField(primary_key= True)

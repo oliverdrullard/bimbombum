@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import ModeloUsuario
 from .models import Producto
-from .models import Usuario
+
 
 
 
@@ -36,11 +36,11 @@ class UsuarioLoginForm(forms.Form):
     class Meta:
         model = ModeloUsuario
 
-        fields = ['nombre', 'password1']
+        fields = ['email', 'password1']
 
         widgets = {
-            'nombre':forms.TextInput(attrs={'class':'input-contenedor', 'placeholder':'Nombre'}),
-            'password1':forms.PasswordInput(attrs={'class':'input-contenedor', 'placeholder':'Contraseña'})
+            'email':forms.TextInput(attrs={'class':'input-contenedor', 'placeholder':'Nombre'}),
+            'password':forms.PasswordInput(attrs={'class':'input-contenedor', 'placeholder':'Contraseña'})
         }
 
 
