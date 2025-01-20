@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -10,14 +12,19 @@ from .forms import ProductForm
 from .forms import UsuarioRegistroForm
 from .forms import UsuarioLoginForm
 
-
+# registro de usuarios
 class UsuarioRegistro(View):
+
+    @method_decorator(csrf_protect)
     def get(self, request):
         form = UsuarioRegistroForm()
         return render(request, 'registracion/registro.html', {'form': form})
 
+    @method_decorator(csrf_protect)
     def post(self, request):
         form = UsuarioRegistroForm(request.POST, request.FILES)
+        if not form.is_valid():
+            return render(request, 'registracion/registro.html', {'form': form})
         if form.is_valid():
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
@@ -35,7 +42,7 @@ class UsuarioRegistro(View):
             return redirect('cardprincipal')
         return render(request, 'registracion/registro.html', {'form': form, 'error': 'Datos inválidos'})
 
-
+# login del usuario 
 class UsuarioLoginView(View):
     def get(self, request):
         form = UsuarioLoginForm()

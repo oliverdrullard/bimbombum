@@ -5,29 +5,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/registro.css">
 
-    <form class="formulario" method="post" enctype="multipart/form-data" action="{% url 'cardprincipal' %}"> 
+
+    <form class="formulario" method="post" enctype="multipart/form-data" action="{% url 'registro' %}"> 
         {% csrf_token %}
         <h1>Registrate</h1>
         <div class="contenedor__registro">
             <div class="input-contenedor">
                 <i class="fas fa-user icon" ></i>
                 {{ form.nombre }}
+                {% if form.nombre.errors %}
+                    <span class="error">{{ form.nombre.errors.0 }}</span>
+                {% endif %}
             </div>
             <div class="input-contenedor">
                 <i class="fa-solid fa-envelope icon"></i>
                 {{ form.email }}
+                {% if form.email.errors %}
+                    <span class="error">{{ form.email.errors.0 }}</span>
+                {% endif %}
             </div>
             <div class="input-contenedor" >
                 <i class="fa-solid fa-lock icon"></i>
                 {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <span class="error">{{ form.password1.errors.0 }}</span>
+                {% endif %}
             </div>
             <div class="input-contenedor">
                 <i class="fa-solid fa-lock icon"></i>
                 {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <span class="error">{{ form.password2.errors.0 }}</span>
+                {% endif %}
             </div>
             <div class="input-contenedor">
                 <i class="fa-solid fa-house icon"></i>
                 {{ form.direccion }}
+                {% if form.direccion.errors %}
+                    <span class="error">{{ form.direccion.errors.0 }}</span>
+                {% endif %}
             </div>
             <div class="input-contenedor">
                 <i class="fa-regular fa-credit-card icon"></i>
@@ -35,7 +51,7 @@
             </div>
             <button type="submit" value="Registrate" class="button">Registar</button>
             <P>Al registrarte, aceptas los terminos y condiciones</P>
-            <p>¿Ya tienes una cuenta?<a class="link" href="{% url 'login'%}">Inicar sesion</a></p>
+            <p>¿Ya tienes una cuenta?<a class="link" href="{% url 'login'%}">Iniciar sesión</a></p>
 
         </div>
     </form>

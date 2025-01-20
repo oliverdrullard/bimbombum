@@ -8,7 +8,10 @@
     margin: 0;
     padding: 3px;
 }
-
+.error{
+    color: red;
+    margin-left: 50px;
+}
 .contenedor__registro{
     width: 100%;
     padding: 15px;
