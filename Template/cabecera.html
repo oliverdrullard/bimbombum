@@ -16,9 +16,17 @@
             </div>
            
         </form>
-        <a href="{% url 'registro'%}">
-            <i class="fa-solid fa-user"></i>
-        </a>
+        <div class="sesion_usuario_padre">
+            {% if user.is_authenticated %}
+                <i class="fa-solid fa-user"></i> {{ user.nombre }}
+                <a href="{% url 'logout' %}">(Cerrar sesión)</a>
+            {% else %}
+                <a href="{% url 'registro' %}">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            {% endif%}
+        </div>
+        
         <a href="{% url 'carrito'%}">
             <i class="fa-solid fa-cart-plus"></i>
             

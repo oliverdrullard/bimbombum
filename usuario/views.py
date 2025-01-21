@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
@@ -46,13 +47,16 @@ class UsuarioRegistro(View):
 class UsuarioLoginView(View):
     def get(self, request):
         form = UsuarioLoginForm()
-        return render(request, 'registracion/login.html')
+        return render(request, 'registracion/login.html', {'form':form})
 
     def post(self, request):
         form = UsuarioLoginForm(request.POST)
+        if not form.is_valid():
+            print()
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
+
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
@@ -61,6 +65,16 @@ class UsuarioLoginView(View):
                 return render(request, 'registracion/login.html', {'error': 'Email o contraseña inválidos'})
         return render(request, 'registracion/login.html', {'form': form, 'error': 'Datos inválidos'})
         
+# para deslogear el usuario
+class UsuarioLogout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('cardprincipal')
+
+
+
+
+
 
 class inicio_view(View):
     def get(self, request):

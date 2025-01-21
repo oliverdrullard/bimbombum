@@ -24,12 +24,12 @@
 
         <div class="input-contenedor">
             <i class="fa-solid fa-envelope icon"></i>
-            <input class="campo_informacion" type="email" name="email" placeholder="Email">
+            {{ form.email }}
         </div>
 
         <div class="input-contenedor">
             <i class="fa-solid fa-lock icon"></i>
-            <input class="campo_informacion" type="password" name="password" placeholder="Contraseña">
+            {{ form.password1}}
         </div>
 
         <button type="submit" class="button">Iniciar sesión</button>

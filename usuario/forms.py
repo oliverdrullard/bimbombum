@@ -33,15 +33,14 @@ class UsuarioRegistroForm(UserCreationForm):
 
 class UsuarioLoginForm(forms.Form):
 
-    class Meta:
-        model = ModeloUsuario
+    email = forms.EmailField(
+        widget=forms.TextInput(attrs={'class': 'campo_informacion', 'placeholder': 'Email'})
+    )
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'campo_informacion', 'placeholder': 'Contraseña'})
+    )
 
-        fields = ['email', 'password1']
 
-        widgets = {
-            'email':forms.TextInput(attrs={'class':'input-contenedor', 'placeholder':'Nombre'}),
-            'password':forms.PasswordInput(attrs={'class':'input-contenedor', 'placeholder':'Contraseña'})
-        }
 
 
 
