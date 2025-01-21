@@ -1,4 +1,11 @@
 /*Estilos generales para tener una mejor presicion con las medidas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
 
 .filter {
     -webkit-backdrop-filter: blur(4px);
@@ -98,7 +105,6 @@ hr {
     text-align: center;
     align-items: center;
     justify-content: center;
-    margin-top: 25px;
 
 }
 
@@ -129,33 +135,7 @@ a {
     font-size: 25px;
     padding:10px;
 }
-/* stilos para el menu de registro */
 
-.menu-horisontal{
-    list-style: none;
-    justify-content: space-around;
-    padding-left: 0;
-    
-}
-.menu-vertical{
-    padding-top: 40px;
-    position: absolute;
-    display: none;
-    list-style: none;
-    padding-left: 0;
-    
-    
-    
-    
-}
-.menu-horisontal li:hover .menu-vertical{
-    display: block;
-}
-.menu-vertical a{
-    color: #737373;
-    font-size: 20px;
-    
-}
 #elederecha {
     float: right;
     padding: 10px;
@@ -214,5 +194,3 @@ a i{
     border-radius: 50px;
 
 }
-
-
