@@ -16,16 +16,41 @@
             </div>
            
         </form>
-        <div class="sesion_usuario_padre">
+        
             {% if user.is_authenticated %}
-                <i class="fa-solid fa-user"></i> {{ user.nombre }}
-                <a href="{% url 'logout' %}">(Cerrar sesión)</a>
+                <ul class="menu-horisontal">
+                    <li>
+                        <a href="">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <ul class="menu-vertical">
+                            <li>
+                                <a href="#">{{ user.nombre }}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             {% else %}
-                <a href="{% url 'registro' %}">
-                    <i class="fa-solid fa-user"></i>
-                </a>
+                <ul class="menu-horisontal">
+                    <li>
+                        <a href="">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <ul class="menu-vertical">
+                            <li>
+                                <a href="{% url 'registro' %}">Crear cuenta</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'login'%}">Iniciar sesion</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             {% endif%}
-        </div>
+        
         
         <a href="{% url 'carrito'%}">
             <i class="fa-solid fa-cart-plus"></i>
