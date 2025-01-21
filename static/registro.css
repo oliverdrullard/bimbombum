@@ -1,8 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+
 .formulario{
     background-color: #000000;
     margin: 0;
@@ -42,7 +38,7 @@ h1{
 .input-contenedor{
     margin-bottom: 15px;
     border: 1px solid #aaa;
-    width: 98%;
+    
     
     
 
@@ -91,7 +87,6 @@ p{
     .formulario{
         margin: auto;
         width: 500px;
-        margin-top: 150px;
         border-radius: 2%;
     }
 }
