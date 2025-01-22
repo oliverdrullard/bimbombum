@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
+from django.db.models import Q 
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
@@ -12,6 +13,7 @@ from .models import Carrusel
 from .forms import ProductForm
 from .forms import UsuarioRegistroForm
 from .forms import UsuarioLoginForm
+from .models import Categoria
 
 # registro de usuarios
 class UsuarioRegistro(View):
@@ -72,10 +74,6 @@ class UsuarioLogout(View):
         return redirect('cardprincipal')
 
 
-
-
-
-
 class inicio_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/cardprincipal.html')
@@ -83,6 +81,7 @@ class inicio_view(View):
 class cabecera_view(View):
     def get(self, request):
         return render(request, 'cabesera.html')
+       
 
 
 class pie_view(View):
@@ -120,7 +119,7 @@ class cardhogar_view(View):
         producto_hogar = Producto.objects.filter(categoria=5, activo=True) # El numero 5 es el id de la categoria hogar
         producto_hogar_r = list(producto_hogar)[::-1]
         prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardhogar.html', {'producto_hogar_r': producto_hogar_r, 'prueva':prueva})
+        return render(request, 'pantallas_usuarios/cardhogar.html', {'producto_hogar_r': producto_hogar_r,'prueva':prueva})
 
 
 class cardniños_view(View):
@@ -133,9 +132,22 @@ class cardniños_view(View):
 
 class cardprincipal_view(View):
     def get(self, request):
+        busqueda = request.GET.get('buscar')
+
         product = Producto.objects.filter(activo=True)
+
+        if busqueda:
+            product = Producto.objects.filter(
+                Q(nombre__icontains = busqueda) |
+                Q(descripcion__icontains = busqueda)|
+                Q(zise1__icontains = busqueda)|
+                Q(colores__icontains = busqueda)|
+                Q(precio__icontains = str(busqueda))
+            ).distinct()
+
         producto_r = list(product)[::-1]
         prueva = Producto.objects.order_by('-id_producto')[:3]
+
         return render(request, 'pantallas_usuarios/cardprincipal.html', {'producto_r': producto_r, 'prueva':prueva})
         
 
