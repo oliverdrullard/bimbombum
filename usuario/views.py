@@ -147,7 +147,6 @@ class cardprincipal_view(View):
 
         producto_r = list(product)[::-1]
         prueva = Producto.objects.order_by('-id_producto')[:3]
-
         return render(request, 'pantallas_usuarios/cardprincipal.html', {'producto_r': producto_r, 'prueva':prueva})
         
 
