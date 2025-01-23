@@ -72,10 +72,6 @@ class UsuarioLogout(View):
         return redirect('cardprincipal')
 
 
-
-
-
-
 class inicio_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/cardprincipal.html')
