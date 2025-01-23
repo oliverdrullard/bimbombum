@@ -203,15 +203,20 @@ a i{
     height: 40px;
     border: none;
     border-radius: 50px;
-    text-align: center;
     font-size: 25px;
+    margin-left: 5px;
 }
-
+#buscar:focus{
+    outline: none;
+}
 .boton_buscar{
     border: none;
-    background-color: #ffffff;
+    background-color: #000;
     margin-left: 3px;
-    border-radius: 50px;
+    border-radius: 50%;
+    color: #fff;
+    width: 40px;
+    height: 40px;
 
 }
 
