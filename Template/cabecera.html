@@ -81,10 +81,14 @@
 <hr>
 <nav class="nav_menu">
     <div class="navegacion">
-        <a href="{% url 'cardmujeres' %}" class="mujer" di="navegacion_2">MUJER</a>
-        <a href="{% url 'cardhombres' %}" class="hombre">HOMBRE</a>
-        <a href="{% url 'cardniños' %}"  class="niños">NIÑOS/A</a>
-        <a href="{% url 'cardcosmeticos' %}"  class="cosmeticos">COSMETICOS</a>
-        <a href="{% url 'cardhogar' %}"  class="hogar">HOGAR</a>
+        <a href="{% url 'cardprincipal'%}" class="mujer">INICIO</a>
+        <a href="{% url 'categoria' '2' %}" class="mujer" id="navegacion_2">MUJER</a>
+        <a href="{% url 'categoria' '1' %}" class="hombre">HOMBRE</a>
+        <a href="{% url 'categoria' '3' %}"  class="niños">NIÑOS/A</a>
+        <a href="{% url 'categoria' '5' %}"  class="hogar">HOGAR</a>
     </div>
-</nav><br>
+</nav>
+
+<br>
+
+

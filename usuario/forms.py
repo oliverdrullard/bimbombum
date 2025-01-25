@@ -61,3 +61,4 @@ class ProductForm(forms.ModelForm):
             'activo': forms.CheckboxInput(attrs={'class':'sin_cls '}),
         }
 
+ 

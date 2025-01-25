@@ -3,19 +3,11 @@ from . import views
 
 urlpatterns = [
 
+    path('categoria/<int:categoria_id>/',views.CategoriaView.as_view(), name='categoria'),
     path('registro/',views.UsuarioRegistro.as_view(),name='registro'),
     path('login/',views.UsuarioLoginView.as_view(),name='login'),
     path('logout/',views.UsuarioLogout.as_view(),name='logout'),
-    path('index/', views.inicio_view.as_view(), name='index'),
-    path('cabecera/', views.cabecera_view.as_view(), name='cabecera'),
-    path('pie/', views.pie_view.as_view(), name='pie'),
-    path('cardhombres/', views.cardhombres_view.as_view(), name='cardhombres'),
-    path('cardmujeres/', views.cardmujeres_view.as_view(), name='cardmujeres'),
-    path('cardcosmeticos/', views.cardcosmeticos_view.as_view(), name='cardcosmeticos'),
-    path('cardhogar/', views.cardhogar_view.as_view(), name='cardhogar'),
-    path('carrusel/', views.carrusel_view.as_view(), name='carrusel'),
     path('cardprincipal/', views.cardprincipal_view.as_view(), name='cardprincipal'),
-    path('cardniños/', views.cardniños_view.as_view(), name='cardniños'),
     path('lista_megusta/', views.lista_megusta_view.as_view(), name='lista_megusta'),
     path('carrito/', views.carrito_view.as_view(), name='carrito'),
     path('pantallaMensajes/', views.pantallaMensajes_view.as_view(), name='pantallaMensajes'),
