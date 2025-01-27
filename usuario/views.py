@@ -83,12 +83,12 @@ class CategoriaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         categoria_id = self.kwargs.get('categoria_id')
-
+        
         busqueda = self.request.GET.get('buscar')
-
+        
         categoria = Categoria.objects.get(id=categoria_id)
         productos = Producto.objects.filter(categoria=categoria, activo=True)
-        
+
         if busqueda:
             productos = Producto.objects.filter(
                 Q(nombre__icontains = busqueda) |
