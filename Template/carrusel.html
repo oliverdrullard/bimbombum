@@ -9,7 +9,7 @@
 
         <div id="carouselExample" class="carousel slide">
             <div class="carousel-inner">
-            {% for carrus in prueva %}
+            {% for carrus in carrusel %}
               <div class="carousel-item {% if forloop.first %}active{% endif %}">
                 <img src="{{carrus.imagen.url}}" class="d-block w-100" alt="{{carrus.nombre}}">
               </div>

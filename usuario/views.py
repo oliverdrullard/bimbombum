@@ -5,6 +5,7 @@ from django.contrib.auth import logout
 from django.db.models import Q 
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -74,62 +75,38 @@ class UsuarioLogout(View):
         return redirect('cardprincipal')
 
 
-class inicio_view(View):
-    def get(self, request):
-        return render(request, 'pantallas_usuarios/cardprincipal.html')
-
-class cabecera_view(View):
-    def get(self, request):
-        return render(request, 'cabesera.html')
-       
-
-
-class pie_view(View):
-    def get(self, request):
-        return render(request, 'pie.html')
-
 # Pantallas de las caregorias
 
-class cardhombres_view(View):
-    def get(self, request):
-        producto_hombre = Producto.objects.filter(categoria=1, activo=True)  # El 1 es el id de la categoria hombre
-        producto_hombre_r = list(producto_hombre)[::-1]
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardhombres.html', {'producto_hombre_r': producto_hombre_r, 'prueva':prueva})
+class CategoriaView(TemplateView):
+    template_name = 'pantallas_usuarios/categoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categoria_id = self.kwargs.get('categoria_id')
+        
+        busqueda = self.request.GET.get('buscar')
+        
+        categoria = Categoria.objects.get(id=categoria_id)
+        productos = Producto.objects.filter(categoria=categoria, activo=True)
 
+        if busqueda:
+            productos = Producto.objects.filter(
+                Q(nombre__icontains = busqueda) |
+                Q(descripcion__icontains = busqueda)|
+                Q(zise1__icontains = busqueda)|
+                Q(colores__icontains = busqueda)|
+                Q(precio__icontains = str(busqueda))
+            ).distinct()
 
-class cardmujeres_view(View):
-    def get(self, request):
-        producto_mujeres = Producto.objects.filter(categoria=2, activo=True)  # el 2 es el id de la categoria mujer
-        producto_mujeres_r = list(producto_mujeres)[::-1]
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardmujeres.html', {'producto_mujeres_r': producto_mujeres_r, 'prueva':prueva})
+        productos = list(reversed(productos))
+        carrusel = Producto.objects.order_by('-id_producto')[:3]
 
+        context['producto_r'] = productos  
+        context['categoria'] = categoria
+        context['carrusel'] = carrusel
+        return context
 
-class cardcosmeticos_view(View):
-    def get(self, request):
-        producto_cosmetico = Producto.objects.filter(categoria=4, activo=True)  # el 4 es el id de la categoria cosmetico
-        producto_cosmetico_r = list(producto_cosmetico)[::-1]
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardcosmeticos.html', {'producto_cosmetico_r': producto_cosmetico_r, 'prueva':prueva})
-
-
-class cardhogar_view(View):
-    def get(self, request):
-        producto_hogar = Producto.objects.filter(categoria=5, activo=True) # El numero 5 es el id de la categoria hogar
-        producto_hogar_r = list(producto_hogar)[::-1]
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardhogar.html', {'producto_hogar_r': producto_hogar_r,'prueva':prueva})
-
-
-class cardniños_view(View):
-    def get(self, request):
-        producto_child = Producto.objects.filter(categoria=3, activo=True) # El numero 3 es el id de la categoria niños
-        producto_child_r = list(producto_child)[::-1]
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardniños.html', {'producto_child_r': producto_child_r, 'prueva':prueva})
-
-
+    
 class cardprincipal_view(View):
     def get(self, request):
         busqueda = request.GET.get('buscar')
@@ -146,8 +123,8 @@ class cardprincipal_view(View):
             ).distinct()
 
         producto_r = list(product)[::-1]
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'pantallas_usuarios/cardprincipal.html', {'producto_r': producto_r, 'prueva':prueva})
+        carrusel = Producto.objects.order_by('-id_producto')[:3]
+        return render(request, 'pantallas_usuarios/cardprincipal.html', {'producto_r': producto_r, 'carrusel':carrusel,})
         
 
 class detallesProductos_view(View):
@@ -176,10 +153,6 @@ class quienes_somos_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/quienes_somos.html')
     
-class carrusel_view(View):
-    def get(self, request):
-        prueva = Producto.objects.order_by('-id_producto')[:3]
-        return render(request, 'carrusel.html',{'prueva': prueva})
     
 class Estado_pedivo_view(View):
     def get(self, request):
