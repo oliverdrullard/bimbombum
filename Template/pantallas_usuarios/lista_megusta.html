@@ -9,23 +9,37 @@
     <title>BIM,BOM,BUM/Inicio</title>
 
     <div class="contenedor_titulo">
-        <h1 class="titulo_megusta">Lo que te agustado</h1>
+        <p class="titulo_megusta">Lo que te ha gustado</p>
+        <i class="fa-solid fa-heart"></i>
     </div>
     <section>
-        <div class="contenedor">
-            <div class="card">
-                <figure>
-                    <img src="/static/imagenes/imagen19.jpg" alt="">
-                </figure>
-                <samp class="nombre_articulo">Nombre</samp>
-                <div class="inform">
-                    <p class="precio">$:300</p>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-            </div>
+        
            
-        </div>
+                <div class="contenedor_padre_lista">
+                    <div class="contenedor_hijo_lista">
+                        <div class="card">
+                            <figure>
+                                <img src="/static/imagenes/imagen19.jpg" alt="">
+                            </figure>
+                            <samp class="nombre_articulo">Nombre</samp>
+                            <div class="inform">
+                                <p class="precio">$:300</p>
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-solid fa-heart"></i>
+                                <button>Comprar ahora</button>
+                                <button>Eliminar</button>
+                            </div>
+                        </div>
+                        <div class="div_p">
+                            <p>
+                                <u>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate, rerum!.</u>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            
+           
+       
         
     </section>
 {% endblock %}

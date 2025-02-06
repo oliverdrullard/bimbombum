@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.conf import settings
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -32,18 +33,7 @@ class ModeloUsuario(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     
-# class Usuario(models.Model):
-#     id_usuario = models.AutoField(primary_key=True)
-#     nombre = models.CharField(max_length=100)
-#     email = models.CharField(max_length=100)
-#     password1 = models.CharField(max_length=100)
-#     password2 = models.CharField(max_length=100)
-#     direccion = models.CharField(max_length=100)
-#     formato_pago = models.CharField(max_length=100)
-
-#     def __str__(self):
-#         return self.nombre
-    
+  
 class Puesto(models.Model):
     id_puesto = models.AutoField(primary_key= True)
     nombre = models.CharField(max_length=100)
@@ -78,6 +68,13 @@ class  Lista_usuario(models.Model):
         return self.nombre
     
 
+class  lista_megusta(models.Model):
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
+    producto = models.ForeignKey('Producto',on_delete=models.CASCADE)
+    fecha = models.DateTimeField(auto_now_add=True)    
+
+    class Meta:
+        unique_together = ('usuario','producto') # Para evitar  duplicado
 
 class Producto(models.Model):
     id_producto = models.AutoField(primary_key= True)

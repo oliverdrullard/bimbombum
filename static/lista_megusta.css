@@ -62,15 +62,41 @@
 
 }
 
+.contenedor_titulo{
+  width: 200px;
+  height: 40px;
+  margin-left: 200px;
+  background-color: #000000;
+  border-radius: 50px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .titulo_megusta{
-    text-align: center;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 30px;
+  color: #fff;
+  margin: 0px;
+}
+
+.contenedor_titulo > i{
+  font-size: 20px;
+  color: #ff0000;
+  margin-left: 10px;
+}
+
+.contenedor_padre_lista{
+  border: 1px solid black;
 
 }
 
-.contenedor_titulo{
-    margin-left: 500px;
-    margin-right: 500px;
+.contenedor_hijo_lista{
+  border: 1px solid rebeccapurple;
+  
+  display: flex;
+
+}
+
+.div_p{
+  margin-top: 80px;
+  display: flex;
+  margin-left: 20px;
 }
