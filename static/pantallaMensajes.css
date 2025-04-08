@@ -1,6 +1,35 @@
-.titulo_mensaje{
-    color: #ffffff;
+.titulo-mensaje{
+    width: 200px;
+    height: 40px;   
+    border-radius: 20px;
+    color: #fff;
+    background-color: #000;
     text-align: center;
-    background-color: #000000;
-    
+    margin: auto;
+}
+
+.seccion-mensajes{
+    width: 800px;
+    height: 500px;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.contenedor-mensaje{
+    width: 400px;
+    height: 70px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 10px;
+    overflow: hidden;
+    background-color: #00000073;
+}
+.asunto,.mensaje{
+    margin-left: 10px;
+}
+.mensaje{
+    color: #fff;
 }
