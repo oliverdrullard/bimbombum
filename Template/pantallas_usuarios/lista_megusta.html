@@ -9,23 +9,33 @@
     <title>BIM,BOM,BUM/Inicio</title>
 
     <div class="contenedor_titulo">
-        <h1 class="titulo_megusta">Lo que te agustado</h1>
+        <p class="titulo_megusta">Lo que te ha gustado</p>
+        <i class="fa-solid fa-heart"></i>
     </div>
-    <section>
-        <div class="contenedor">
-            <div class="card">
-                <figure>
-                    <img src="/static/imagenes/imagen19.jpg" alt="">
-                </figure>
-                <samp class="nombre_articulo">Nombre</samp>
-                <div class="inform">
-                    <p class="precio">$:300</p>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <i class="fa-solid fa-heart"></i>
+    <section class="section_megusta">
+           <div class="div_padre_megusta">
+                <div class="div_imagen_megusta">
+                    <img src="/static/imagenes/imagen11.jpg" alt="">
                 </div>
-            </div>
-           
-        </div>
+                <p class="nombre_producto"><strong>Nombre del producto</strong></p>
+                <div class="precio">
+                    <p><strong>$:1000</strong></p>
+                    <div class="iconos_megusta">
+                        <i class="fa-solid fa-cart-shopping " id="carito"></i>
+                        <i class="fa-solid fa-heart" id="corazon"></i>
+                    </div>
+                </div>
+                <p class="descripcion_producto">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Corporis quasi dolorem a recusandae deserunt minus non illo 
+                    laboriosam vero eius! 
+                </p>
+                <div class="div_botones_padre">
+                    <button class="botodes_lista_megusta">Comprar</button>
+                    <button class="botodes_lista_megusta">Eliminar</button>
+                </div>
+           </div>
+       
         
     </section>
 {% endblock %}
