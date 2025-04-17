@@ -2,8 +2,56 @@
 {% load static %}
 
 {% block content %}
-<link rel="stylesheet" href="/static/estado_pedido.css">
+    <link rel="stylesheet" href="/static/estado_pedido.css">
 
-    <h1>Hola mundo</h1>
+    <section class="seccion-seguimiento-pedido">
+        <h2 class="pedido-num">Pedido:445342</h2>
+
+        <div class="padre-informacion-pedido">
+            <div class="estatus-pedido">
+                <p><strong>Pedido recibido</strong><span class="estado-recidido progreso" >100%</span></p>
+                <p><strong>Preparando</strong><span class="estado-preparando progreso" >50%</span></p>
+                <p><strong>Empacando</strong><span class="estado-empacando progreso" >0%</span></p>
+                <p><strong>Encamido</strong><span class="estado-encamido progreso" >0%</span></p>
+                <p><strong>Entregado</strong><span class="estado-entregado progreso" >0%</span></p>
+            </div>
+            <div class="informacion-pedido info">
+                <h4>&#128197; Informacion del pedido</h4>
+                <p>Fecha del pedido: 8 de marzo 2025</p>
+                <p>Fecha de entrega: 20 de marzo 2025</p>
+                <p>Formato de pago: contra entrega</p>
+            </div>
+            <div class="informacion-prodcuto info">
+                <h4>&#128230; Productos comprados</h4>
+                <p><strong>Producto 1</strong></p>
+                <p>Nombre: Abrigo</p>
+                <p>Cantidad: 2</p>
+                <p>Precio unitario: $1000</p>
+                <p>Subtotal: 2000</p>
+                <p><strong>Producto 2</strong></p>
+                <p>Nombre: Abrigo</p>
+                <p>Cantidad: 2</p>
+                <p>Precio unitario: $1000</p>
+                <p>Subtotal: 2000</p>
+            </div>
+            <div class="informacion-envio info">
+                <h4>&#128205; Informacion de envio</h4>
+                <p>Sector: Cienfuegoso</p>
+                <p>Calle: 46</p>
+                <p>Casa: 38</p>
+                <p>Costo de envío: $5.00</p>
+            </div>
+            <div class="total-pedido">
+                <p>&#128176;<strong>Total del pedido: $4,000</strong></p>
+            </div>
+            <div class="notificaciones">
+                <input type="checkbox">
+                <label for="">¿Quieres recibir notificaciones cada vez que se actualice el estado de tu pedido?</label>
+
+            </div>
+        </div>
+
+    </section>
+    
 
 {% endblock%}
