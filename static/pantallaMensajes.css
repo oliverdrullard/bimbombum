@@ -10,7 +10,7 @@
 
 .seccion-mensajes{
     width: 800px;
-    border: 2px solid black;
+    border: 2px solid #ccc;
     border-radius: 20px;
     margin: auto;
     margin-top: 10px;
@@ -23,7 +23,7 @@
 .contenedor-mensaje{
     width: 400px;
     height: 70px;
-    border: 2px solid black;
+    border: 2px solid #000;
     border-radius: 10px;
     margin: auto;
     margin-top: 10px;
@@ -42,6 +42,7 @@
 }
 .contenedor-mensaje:hover{
     height: 425px;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
    
 }
 
