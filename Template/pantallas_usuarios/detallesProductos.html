@@ -9,32 +9,41 @@
     <title>Detalles del producto</title>
 
     <main>
-    
-        <div class="contenedor">
-            {% for detalles in detalles %}
-                <div class="card">
-                    <figure>
-                        <img src="{{ detalles.imagen.url }}" alt="">
-                    </figure>
-                    <br>
-                    <p class="precio"><big>${{ detalles.precio }}</big></p><br>
-                    <div class="logosC" >
-                        <i class="fa-solid fa-cart-shopping i_logos_compras" ></i>
-                        <i class="fa-solid fa-heart i_logos_compras"></i>
-                        <i class="fa-solid fa-money-bill-1-wave i_logos_compras"></i>
-                        <label for="cantidad"class="input-label precio">Cantidad</label>
-                        <input type="number" class="cantidad">
-                    </div>
-                    <br>
-                    <button class="boton_comprar"><big>Comprar</big></button>
+       <section class="seccion-informacion-producto">
+            <div class="padre-informacion">
+                <div class="div-imagen">
+                    <img src="/media/static/abrigo_hombre1.jpg" alt="">
                 </div>
-                
-                <p class="descriccion">
-                    {{ detalles.descripcion }}
-                </p>
-            {%endfor%}
-        </div> 
-    
+                <div class="informacion">
+                    <p class="nombre-producto"><strong>Camiseta Nike Aire $39,99</strong></p>
+                    <ul>
+                        <li>
+                            Abrigo negro elegante de corte clásico, ideal para climas 
+                            fríos. Confeccionado en tela de alta calidad, con botones frontales
+                            y bolsillos laterales.
+                        </li>
+                        <li>
+                            Envío disponible a nivel nacional. Tiempo 
+                            estimado de entrega: 3 a 5 días hábiles.
+                        </li>
+                        <li>Confeccionado en poliéster y lana para mayor calidez y durabilidad.</li>
+                    </ul>
+                    <div class="div-botones">
+                        <div class="div-cantidad">
+                            <button class="boton-menos" id="menos">-</button>
+                            <input type="number" min="1" value="1" class="cantidad">
+                            <button class="boton-mas" id="mas">+</button>
+                        </div>
+                        <button class="boton-carrito">Añadir al carrito</button>
+                    </div>
+                    <button class="boton-megusta">
+                        <i class="far fa-heart"></i>
+                        Añadir a megusta
+                    </button>
+                    
+            </div>
+
+       </section>
     </main>
 
 {% endblock %}
