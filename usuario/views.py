@@ -125,8 +125,7 @@ class cardprincipal_view(View):
         producto_r = list(product)[::-1]
         carrusel = Producto.objects.order_by('-id_producto')[:3]
         return render(request, 'pantallas_usuarios/cardprincipal.html', {'producto_r': producto_r, 'carrusel':carrusel,})
-        
-
+          
 class detallesProductos_view(View):
     def get(self, request, id_producto):
         detalles = Producto.objects.filter(id_producto=id_producto)

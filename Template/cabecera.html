@@ -81,12 +81,13 @@
 <hr>
 <nav class="nav_menu">
     <div class="navegacion">
-        <a href="{% url 'cardprincipal'%}" class="mujer">INICIO</a>
-        <a href="{% url 'categoria' '2' %}" class="mujer" id="navegacion_2">MUJER</a>
-        <a href="{% url 'categoria' '1' %}" class="hombre">HOMBRE</a>
-        <a href="{% url 'categoria' '3' %}"  class="niños">NIÑOS/A</a>
-        <a href="{% url 'categoria' '5' %}"  class="hogar">HOGAR</a>
-    </div>
+        <a href="{% url 'cardprincipal'%}" class="{% if not categoria %}activo{% endif %}">INICIO</a>
+        {% for cat in categorias %}
+            <a href="{% url 'categoria' cat.id %}" class="{% if categoria.id == cat.id %}activo{% endif %} catego">
+                {{ cat.nombre|upper }}
+            </a>
+        {% endfor%}
+    </div> 
 </nav>
 
 <br>

@@ -74,6 +74,7 @@ hr {
 /*Estilos para la navegacion*/
 
 .navegacion a {
+    margin-left: 5px;
     padding-left: 75px;
     padding-right: 75px;
     color: #ffffff;
@@ -82,9 +83,6 @@ hr {
     padding-top: 5px;
     transition: all 400ms ease;
     padding-bottom: 5px;
-    
-
-
 }
 
 .navegacion a:hover {
@@ -93,9 +91,9 @@ hr {
     color: #000000;
     font-size: 15px;
 }
-#navegacion_2:target{
+.navegacion a.activo{
     border: 1px solid black;
-    background-color: #ffffff	;
+    background-color: #cccccc46	;
     color: #000000;
     font-size: 15px;
 }
