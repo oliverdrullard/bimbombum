@@ -10,23 +10,22 @@
 
     <main>
        <section class="seccion-informacion-producto">
+        {% for detalles in detalles%}
             <div class="padre-informacion">
                 <div class="div-imagen">
-                    <img src="/media/static/abrigo_hombre1.jpg" alt="">
+                    <img src="{{detalles.imagen.url}}" alt="">
                 </div>
                 <div class="informacion">
-                    <p class="nombre-producto"><strong>Camiseta Nike Aire $39,99</strong></p>
+                    <p class="nombre-producto"><strong>{{detalles.nombre}} ${{detalles.precio}} </strong></p>
                     <ul>
                         <li>
-                            Abrigo negro elegante de corte clásico, ideal para climas 
-                            fríos. Confeccionado en tela de alta calidad, con botones frontales
-                            y bolsillos laterales.
+                            {{detalles.descripcion}}
+                            ${{detalles.precio}}
                         </li>
                         <li>
-                            Envío disponible a nivel nacional. Tiempo 
-                            estimado de entrega: 3 a 5 días hábiles.
+                            {{detalles.envio}}
                         </li>
-                        <li>Confeccionado en poliéster y lana para mayor calidez y durabilidad.</li>
+                        <li>{{detalles.material}}.</li>
                     </ul>
                     <div class="div-botones">
                         <div class="div-cantidad">
@@ -42,7 +41,7 @@
                     </button>
                     
             </div>
-
+        {% endfor %}
        </section>
     </main>
 
