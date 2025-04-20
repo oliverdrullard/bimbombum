@@ -83,21 +83,8 @@ class CategoriaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         categoria_id = self.kwargs.get('categoria_id')
-        
-        busqueda = self.request.GET.get('buscar')
-        
         categoria = Categoria.objects.get(id=categoria_id)
         productos = Producto.objects.filter(categoria=categoria, activo=True)
-
-        if busqueda:
-            productos = Producto.objects.filter(
-                Q(nombre__icontains = busqueda) |
-                Q(descripcion__icontains = busqueda)|
-                Q(zise1__icontains = busqueda)|
-                Q(colores__icontains = busqueda)|
-                Q(precio__icontains = str(busqueda))
-            ).distinct()
-
         productos = list(reversed(productos))
         carrusel = Producto.objects.filter(categoria=categoria, activo=True)[:3]
 
@@ -109,19 +96,7 @@ class CategoriaView(TemplateView):
     
 class cardprincipal_view(View):
     def get(self, request):
-        busqueda = request.GET.get('buscar')
-
         product = Producto.objects.filter(activo=True)
-
-        if busqueda:
-            product = Producto.objects.filter(
-                Q(nombre__icontains = busqueda) |
-                Q(descripcion__icontains = busqueda)|
-                Q(zise1__icontains = busqueda)|
-                Q(colores__icontains = busqueda)|
-                Q(precio__icontains = str(busqueda))
-            ).distinct()
-
         producto_r = list(product)[::-1]
         carrusel = Producto.objects.order_by('-id_producto')[:3]
         return render(request, 'pantallas_usuarios/cardprincipal.html', {'producto_r': producto_r, 'carrusel':carrusel,})
@@ -132,6 +107,10 @@ class detallesProductos_view(View):
         return render(request, 'pantallas_usuarios/detallesProductos.html', {'detalles': detalles})
     
 # Pantallas de las opciones de usuarios
+class ResultadosBusquedaView(TemplateView):
+    template_name = 'pantallas_usuarios/resultado_busqueda.html'
+    
+
 
 class lista_megusta_view(View):
     def get(self, request):

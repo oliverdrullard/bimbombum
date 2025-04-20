@@ -6,22 +6,21 @@ def categorias_disponibles(request):
     categorias = Categoria.objects.filter(activo=True)
     return{'categorias':categorias}
 
-# def buscardor(request):
-#     producto_r = []
-#     busqueda = request.GET.get('buscar')
-#     busqueda_actual = busqueda
+def barra_busqueda_context(request):
+    query = request.GET.get('buscar', '').strip()
+    productos_resultado = []
 
-#     if busqueda:
-#         producto_r = Producto.objects.filter(
-#             Q(nombre__icontains=busqueda) |
-#             Q(descripcion__icontains=busqueda) |
-#             Q(zise1__icontains=busqueda) |
-#             Q(colores__icontains=busqueda) |
-#             Q(precio__icontains=str(busqueda))
-#         ).distinct()
-
-#     return {
-#         'producto_r': producto_r,
-#         'busqueda_actual': busqueda_actual
-#     }
+    if query:
+        productos_resultado = Producto.objects.filter(
+            Q(nombre__icontains=query) |
+            Q(descripcion__icontains=query) |
+            Q(zise1__icontains=query) |
+            Q(colores__icontains=query) |
+            Q(precio__icontains=query)
+        ).distinct().order_by('-id_producto')  # ordena del más nuevo al más viejo
+    print(productos_resultado)
+    return {
+        'buscar_query': query,
+        'resultados_busqueda': productos_resultado
+    }
     
