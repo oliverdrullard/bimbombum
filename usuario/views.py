@@ -99,7 +99,7 @@ class CategoriaView(TemplateView):
             ).distinct()
 
         productos = list(reversed(productos))
-        carrusel = Producto.objects.order_by('-id_producto')[:3]
+        carrusel = Producto.objects.filter(categoria=categoria, activo=True)[:3]
 
         context['producto_r'] = productos  
         context['categoria'] = categoria
