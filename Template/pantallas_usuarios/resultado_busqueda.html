@@ -1,0 +1,36 @@
+{% extends "app.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'card.css' %}">
+<link rel="stylesheet" href="{% static 'resultado_busqueda.css' %}">
+
+<div class="div-titulo-busquesa">
+    <h2 class="titulo-busudada">Resultados: "{{ buscar_query }}"</h2>
+</div>
+<section class="seccion_ropa">
+    
+    <div class="contenedor">
+
+        {% if resultados_busqueda %}
+            {% for producto in resultados_busqueda %}
+                <div class="card">
+                    <figure>
+                        <a href="{% url 'detallesProductos' producto.id_producto %}">
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        </a>
+                    </figure>
+                    <h5 class="nombre_articulo">{{ producto.nombre }}</h5>
+                    <div class="inform">
+                        <p class="precio">$ {{ producto.precio }}</p>
+                        <i class="fa-solid fa-cart-shopping" id="carito"></i>
+                        <i class="fa-solid fa-heart" id="corazon"></i>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No se encontraron resultados para "{{ buscar_query }}".</p>
+        {% endif %}
+    </div>       
+</section>
+{% endblock %}
