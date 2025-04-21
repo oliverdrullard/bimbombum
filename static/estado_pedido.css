@@ -1,3 +1,65 @@
-h1{
-    color: aqua;
+.seccion-seguimiento-pedido{
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+.pedido-num{
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 1.5rem;
+    width: fit-content;
+    margin: auto;
+}
+.padre-informacion-pedido{
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.estatus-pedido p{
+    margin: 10px 0;
+    display: flex; 
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+    font-size: 20px;
+}
+.progreso{
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 5px;
+}
+.estado-recidido {
+    background-color: #4caf50;
+    color: #fff;
+}
+.estado-preparando {
+    background-color: #ff9800;
+    color: #fff;
+}
+.estado-empacando, .estado-encamido, .estado-entregado {
+    background-color: #000;
+    color: #fff;
+}
+.info{
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+}
+.info h4{
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.total-pedido{
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: bold;
 }

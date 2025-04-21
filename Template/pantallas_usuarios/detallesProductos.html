@@ -9,32 +9,40 @@
     <title>Detalles del producto</title>
 
     <main>
-    
-        <div class="contenedor">
-            {% for detalles in detalles %}
-                <div class="card">
-                    <figure>
-                        <img src="{{ detalles.imagen.url }}" alt="">
-                    </figure>
-                    <br>
-                    <p class="precio"><big>${{ detalles.precio }}</big></p><br>
-                    <div class="logosC" >
-                        <i class="fa-solid fa-cart-shopping i_logos_compras" ></i>
-                        <i class="fa-solid fa-heart i_logos_compras"></i>
-                        <i class="fa-solid fa-money-bill-1-wave i_logos_compras"></i>
-                        <label for="cantidad"class="input-label precio">Cantidad</label>
-                        <input type="number" class="cantidad">
-                    </div>
-                    <br>
-                    <button class="boton_comprar"><big>Comprar</big></button>
+       <section class="seccion-informacion-producto">
+        {% for detalles in detalles%}
+            <div class="padre-informacion">
+                <div class="div-imagen">
+                    <img src="{{detalles.imagen.url}}" alt="">
                 </div>
-                
-                <p class="descriccion">
-                    {{ detalles.descripcion }}
-                </p>
-            {%endfor%}
-        </div> 
-    
+                <div class="informacion">
+                    <p class="nombre-producto"><strong>{{detalles.nombre}} ${{detalles.precio}} </strong></p>
+                    <ul>
+                        <li>
+                            {{detalles.descripcion}}
+                            ${{detalles.precio}}
+                        </li>
+                        <li>
+                            {{detalles.envio}}
+                        </li>
+                        <li>{{detalles.material}}.</li>
+                    </ul>
+                    <div class="div-botones">
+                        <div class="div-cantidad">
+                            <button class="boton-menos" id="menos">-</button>
+                            <input type="number" min="1" value="1" class="cantidad">
+                            <button class="boton-mas" id="mas">+</button>
+                        </div>
+                        <button class="boton-carrito">Añadir al carrito</button>
+                    </div>
+                    <button class="boton-megusta">
+                        <i class="far fa-heart"></i>
+                        Añadir a megusta
+                    </button>
+                    
+            </div>
+        {% endfor %}
+       </section>
     </main>
 
 {% endblock %}

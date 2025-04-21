@@ -9,21 +9,58 @@
     <title>BIM,BOM,BUM/Inicio</title>
 
     <div class="contenedor_titulo">
-        <h1 class="titulo_megusta">Carrito</h1>
+        <h3 class="titulo_megusta">&#128722;Carrito</h3>
     </div>
-    <section>
-        <div class="contenedor">
-            <div class="card">
-                <figure>
-                    <img src="/static/imagenes/imagen13.jpg" alt="">
-                </figure>
-                <samp class="nombre_articulo"><big><b>Nombre</b></big></samp>
-                <div class="inform">
-                    <p class="precio">$:300</p>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <i class="fa-solid fa-heart"></i>
+    <section class="seccion-carrito">
+        <hr>
+        <div class="informacion-carrito">
+            
+           <div class="div-imagen">
+            <img src="/media/static/abrigo_hombre1.jpg" alt="imagen-producto" class="imagen-producto">
+           </div>
+
+           <div class="div-informacion-carrito">
+                <div class="div-precio"><p class="precio"><b>$12.99</b></p></div>
+                <p class="nombre-producto"><b>Nombre del producto</b></p>
+                <div class="stock">
+                    <span><img src="/static/logos/en-stock.png" alt="stock" class="imagen-stock">50</span>
+                    <div class="div-stock">
+                        <p>In stock</p>
+                    </div>
                 </div>
+                <br>
+
+              <div class="div-botones-cnat-sezi-color">
+                <select name="tallas" id="tallas" class="talla">
+                    <option value="small">S</option>
+                    <option value="medium">M</option>
+                    <option value="large">L</option>
+                    <option value="extralarge ">XL</option>
+                    <option value="extraextralarge">XXL</option>
+                </select>
+
+                <select name="color" id="color" class="colores">
+                    <option value="blanco">Blanco</option>
+                    <option value="negro">Negro</option>
+                    <option value="azul">Azul</option>
+                    <option value="verde">Verde</option>
+                    <option value="morado">Morado</option>
+                </select>
+
+                <div class="div-cantidad">
+                    <button class="boton-menos" id="menos">-</button>
+                    <input type="number" min="1" value="1" class="cantidad">
+                    <button class="boton-mas" id="mas">+</button>
+                </div>
+              </div>
+                <br>
+                <button class="comprar"><i class="fas fa-credit-card"></i>Comprar</button>
+                <button class="eliminar"><i class="fas fa-trash"></i>Elimnar</button>
             </div>
            
         </div>
+        <hr>
+    </section>
     {% endblock%}
+
+    

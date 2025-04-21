@@ -1,76 +1,148 @@
-/*seccion de la ropa*/
-
-.contenedor{
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1100px;
-    margin-top: 40px;
-    margin-left: 250px ;
-  }
-  
-  .card{
-    width: 10rem;
-    margin: 20px;
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
-    cursor: default;
-    transition: all 400ms ease;
-  }
-  
-  .card:hover{
-    box-shadow: 5px 10px 20px rgba(0,0,0,0.4);
-    transform: translateY(-5%);
-  }
-  
-  figure img {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 10px;
-  
-  }
-
-  i{
-    transition: all 400ms ease;
-  }
-
-.card .fa-heart:hover {
-  color: #ff0000;
-  font-size: 20px;
-  transition: all 400ms ease;
-  
-
-}
-
-.card .fa-heart:active {
-  color: #ff0000;
-  font-size: 20px;
-  transition: all 400ms ease;
-  
-
-}
-
-.card .fa-cart-shopping:hover{
-  color: #0485FD;
-  font-size: 20px;
-  transition: all 400ms ease;
-}
-
-#pie{
-  width: 100% m !important;
-  height: 50px;
-
-}
-
-.titulo_megusta{
-    text-align: center;
-    background-color: #000000;
-    color: #ffffff;
-    font-size: 30px;
-
-}
-
 .contenedor_titulo{
-    margin-left: 500px;
-    margin-right: 500px;
+  width:  150px;
+  border: 1px solid black;
+  border-radius: 15px;
+  text-align: center;
+  margin-left: 50px;
+  background-color: #000;
+  color: #fff;
+}
+
+.seccion-carrito{
+  width: 70%;
+  margin: auto;
+  
+}
+
+.div-imagen{
+  width: 200px;
+  border: 1px solid black;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  
+}
+.imagen-producto{
+  width:  200px; 
+}
+.imagen-stock{
+  width: 30px;
+  
+}
+
+.precio{
+  text-align: end;
+  font-size: 40px;
+}
+.div-precio{
+  float: right;
+  
+}
+
+.informacion-carrito{
+  width: 100%;
+  display: flex;
+}
+
+.div-informacion-carrito{
+  width: 100%;
+  margin-left: 10px;
+  
+}
+
+.nombre-producto{
+  font-size: 21px;
+}
+
+span{
+  font-size: 20px;
+  
+}
+span > img{
+  margin-right: 10px;
+}
+
+.stock{
+  width: 200px;
+  height: 30px;
+  display: flex;
+}
+
+.div-stock{
+  width: 100px;
+  font-size: 20px;
+  margin-left: 10px;
+  border-left: 1px solid #00000031;
+  justify-content: center;
+  color: #0C20FF;
+}
+
+.div-stock > p{
+  margin-left: 10px;
+}
+
+.talla, .colores{
+  width: 125px;
+  height: 40px;
+  border: 2px solid #00000048;
+  font-size: 20px;
+  text-align: center;
+}
+
+.div-botones-cnat-sezi-color{
+  display: flex;
+}
+.div-cantidad{
+  width: 125px;
+  height: 40px;
+  border: 2px solid #00000048;
+  display: flex;
+}
+
+.cantidad{
+  width: 80px;
+  border: none;
+  text-align: center;
+  font-size: 20px;
+  outline: none;
+}
+
+.boton-menos{
+  border: none;
+  background-color: #fff;
+  margin-left: 10px;
+  font-size: 20px;
+  
+}
+
+.boton-mas{
+  border: none;
+  background-color: #fff;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.colores, .div-cantidad{
+  margin-left: 10px;
+}
+
+.comprar, .eliminar{
+  width: 150px;
+  height: 40px;
+  border-radius: 50px;
+  border: none;
+  color: #fff;
+  background-color: #000;
+}
+
+.comprar,.eliminar{
+  font-size: 20px;
+}
+
+.comprar > i{
+  margin-right: 10px;
+}
+.eliminar > i{
+  margin-right: 10px;
 }
