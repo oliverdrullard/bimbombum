@@ -2,6 +2,9 @@
 .section_megusta{
   width: 80%;
   margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
   
   
 }
@@ -36,6 +39,7 @@
   border: 1px solid black;
   background-color: #E5E5E5;
   margin-top: 20px;
+  margin-left: 20px;
   border-radius: 20px;
 }
 
@@ -83,6 +87,7 @@
 }
 
 .div_botones_padre{
+  display: flex;
   text-align: center;
   justify-items: center;
 }

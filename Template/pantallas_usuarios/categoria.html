@@ -22,10 +22,15 @@
                             </a>
                         </figure>
                         <h5 class="nombre_articulo">{{ producto.nombre }}</h5>
+                        <p class="precio">$ {{ producto.precio }}</p>
                         <div class="inform">
-                            <p class="precio">$ {{ producto.precio }}</p>
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <i class="fa-solid fa-heart"></i>
+                            <form method="POST" action="{% url 'agregar_a_lista_me_gusta' producto.id_producto %}">
+                                {% csrf_token%}
+                                <button type="submit" class="boton-lista-megusta">
+                                    <i class="fa-solid fa-heart" id="corazon"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 {% endfor %}

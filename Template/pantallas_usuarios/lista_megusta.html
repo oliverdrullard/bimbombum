@@ -13,29 +13,31 @@
         <i class="fa-solid fa-heart"></i>
     </div>
     <section class="section_megusta">
+        {% for producto in productos %}
            <div class="div_padre_megusta">
                 <div class="div_imagen_megusta">
-                    <img src="/static/imagenes/imagen11.jpg" alt="">
+                    <img src="{{producto.imagen.url}}" alt="">
                 </div>
-                <p class="nombre_producto"><strong>Nombre del producto</strong></p>
+                <p class="nombre_producto"><strong>{{ producto.nombre}}</strong></p>
                 <div class="precio">
-                    <p><strong>$:1000</strong></p>
+                    <p><strong>{{ producto.precio }}</strong></p>
                     <div class="iconos_megusta">
                         <i class="fa-solid fa-cart-shopping " id="carito"></i>
                         <i class="fa-solid fa-heart" id="corazon"></i>
                     </div>
                 </div>
                 <p class="descripcion_producto">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Corporis quasi dolorem a recusandae deserunt minus non illo 
-                    laboriosam vero eius! 
+                    {{ producto.descripcion}} 
                 </p>
                 <div class="div_botones_padre">
                     <button class="botodes_lista_megusta">Comprar</button>
-                    <button class="botodes_lista_megusta">Eliminar</button>
+                    <form method="POST" action="{% url 'eliminar_producto_lista_megusta' producto.id_producto %}">
+                        {% csrf_token %}
+                        <button type="submit" class="botodes_lista_megusta">Eliminar</button>
+                    </form>
                 </div>
            </div>
-       
+       {% endfor %}
         
     </section>
 {% endblock %}

@@ -46,7 +46,11 @@
   i{
     transition: all 400ms ease;
   }
+.boton-lista-megusta{
+  border: none;
+  background-color: #fff;
 
+}
 .card .fa-heart:hover {
   color: #ff0000;
   font-size: 20px;
@@ -74,3 +78,10 @@
   
 
 }
+.inform{
+  display: flex;
+  gap: 10px;
+  text-align: center;
+  justify-content: center;
+}
+

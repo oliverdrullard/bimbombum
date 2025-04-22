@@ -17,7 +17,8 @@ urlpatterns = [
     path('estado_pedidos/', views.Estado_pedivo_view.as_view(), name='estado_pedidos'),
     path('detallesProductos/<id_producto>/', views.detallesProductos_view.as_view(), name='detallesProductos'),
     path('buscar/', views.ResultadosBusquedaView.as_view(), name='resultado_busqueda'),
-
+    path('agregar_a_lista_me_gusta/<int:producto_id>/', views.agregar_a_lista_megusta.as_view(), name='agregar_a_lista_me_gusta'),
+    path('eliminar_producto_lista_megusta/<int:producto_id>/', views.eliminar_producto_lista_megusta.as_view(), name='eliminar_producto_lista_megusta'),
 
     
 ]

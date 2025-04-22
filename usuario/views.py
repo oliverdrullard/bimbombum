@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -15,6 +16,7 @@ from .forms import ProductForm
 from .forms import UsuarioRegistroForm
 from .forms import UsuarioLoginForm
 from .models import Categoria
+from .models import lista_megusta
 
 # registro de usuarios
 class UsuarioRegistro(View):
@@ -112,9 +114,33 @@ class ResultadosBusquedaView(TemplateView):
     
 
 
-class lista_megusta_view(View):
-    def get(self, request):
-        return render(request, 'pantallas_usuarios/lista_megusta.html')
+class lista_megusta_view(LoginRequiredMixin, View):
+   login_url = 'login'
+   def get(self, request):
+        lista_me_gusta = lista_megusta.objects.filter(usuario=request.user)
+        productos = [item.producto for item in lista_me_gusta]
+        
+        return render(request, 'pantallas_usuarios/lista_megusta.html', {'productos': productos})
+
+class agregar_a_lista_megusta(LoginRequiredMixin, View):
+    login_url = 'login'
+    def post(self, request, producto_id):
+        producto = Producto.objects.get(id_producto=producto_id)
+
+        if not lista_megusta.objects.filter(usuario=request.user, producto=producto).exists():
+            lista_megusta.objects.create(usuario=request.user, producto=producto)
+        
+        return redirect('lista_megusta')
+
+class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
+    def post(self, request, producto_id):
+        favorito = lista_megusta.objects.get(usuario=request.user,producto_id=producto_id)
+        favorito.delete()
+
+        return redirect('lista_megusta')
+
+
+
 
 
 class carrito_view(View):
