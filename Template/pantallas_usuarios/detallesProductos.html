@@ -10,22 +10,22 @@
 
     <main>
        <section class="seccion-informacion-producto">
-        {% for detalles in detalles%}
+        {% for producto in detalles%}
             <div class="padre-informacion">
                 <div class="div-imagen">
-                    <img src="{{detalles.imagen.url}}" alt="">
+                    <img src="{{producto.imagen.url}}" alt="">
                 </div>
                 <div class="informacion">
-                    <p class="nombre-producto"><strong>{{detalles.nombre}} ${{detalles.precio}} </strong></p>
+                    <p class="nombre-producto"><strong>{{producto.nombre}} ${{producto.precio}} </strong></p>
                     <ul>
                         <li>
-                            {{detalles.descripcion}}
-                            ${{detalles.precio}}
+                            {{producto.descripcion}}
+                            ${{producto.precio}}
                         </li>
                         <li>
-                            {{detalles.envio}}
+                            {{producto.envio}}
                         </li>
-                        <li>{{detalles.material}}.</li>
+                        <li>{{producto.material}}.</li>
                     </ul>
                     <div class="div-botones">
                         <div class="div-cantidad">
@@ -35,10 +35,15 @@
                         </div>
                         <button class="boton-carrito">Añadir al carrito</button>
                     </div>
-                    <button class="boton-megusta">
-                        <i class="far fa-heart"></i>
-                        Añadir a megusta
-                    </button>
+                    <form method="POST" action="{% url 'agregar_a_lista_me_gusta' producto.id_producto %}">
+                        {% csrf_token %}
+                        <button class="boton-megusta">
+                            <i class="far fa-heart"></i>
+                            Añadir a megusta
+                        </button>
+
+                    </form>
+                    
                     
             </div>
         {% endfor %}
