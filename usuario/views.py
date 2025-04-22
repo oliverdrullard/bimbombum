@@ -139,10 +139,6 @@ class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
 
         return redirect('lista_megusta')
 
-
-
-
-
 class carrito_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/carrito.html')
