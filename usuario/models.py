@@ -80,8 +80,9 @@ class Producto(models.Model):
     id_producto = models.AutoField(primary_key= True)
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=200)
-    zise1 = models.CharField(max_length=10)
-    colores = models.CharField(max_length=200)
+    material = models.CharField(max_length=100, default='N/A')
+    zise1 = models.TextField(default="",help_text="Tallas separadas por coma: S,M,L")
+    colores = models.TextField(default="", help_text="colores separados por coma: rojo,azul,verde")
     imagen = models.ImageField(upload_to='static/')
     categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
     precio = models.DecimalField(max_digits=10,decimal_places=2, default='')
@@ -91,7 +92,11 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre
     
+    def lista_tallas(self):
+        return [t.strip() for t in self.zise1.split(',') if t.strip()]
 
+    def lista_colores(self):
+        return [c.strip() for c in self.colores.split(',') if c.strip()]
 
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key= True)
