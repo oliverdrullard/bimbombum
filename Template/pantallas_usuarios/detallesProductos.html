@@ -35,7 +35,7 @@
                         </div>
                         <button class="boton-carrito">Añadir al carrito</button>
                     </div>
-                    <form method="POST" action="{% url 'agregar_a_lista_me_gusta' producto.id_producto %}">
+                    <form method="POST" action="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}">
                         {% csrf_token %}
                         <button class="boton-megusta">
                             <i class="far fa-heart"></i>

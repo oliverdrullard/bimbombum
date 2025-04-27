@@ -49,6 +49,7 @@
                 </select>
 
                 <div class="div-cantidad">
+                    
                     <input type="number" min="1" value="{{ item.cantidad }}" class="cantidad">
 
                     <form action="{% url 'cart:agregar_al_carrito' producto_id=item.producto.id_producto %}" method="post" style="display: inline;">

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'login.css' %}">
 
-    <form class="formulario" action="{% url 'login' %}" method="post"> 
+    <form class="formulario" action="{% url 'cart:login' %}" method="post"> 
         {% csrf_token %}
         <h1>Login</h1>
 
@@ -34,6 +34,6 @@
 
         <button type="submit" class="button">Iniciar sesión</button>
         <p>Al registrarte, aceptas los términos y condiciones</p>
-        <p>¿No tienes una cuenta? <a class="link" href="{% url 'registro'%}">Crear una cuenta</a></p>
+        <p>¿No tienes una cuenta? <a class="link" href="{% url 'cart:registro'%}">Crear una cuenta</a></p>
     </form>
 {% endblock %}

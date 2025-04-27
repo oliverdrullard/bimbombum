@@ -16,7 +16,7 @@
         {% for producto in productos %}
            <div class="div_padre_megusta">
                 <div class="div_imagen_megusta">
-                   <a href="{% url 'detallesProductos' producto.id_producto%}">
+                   <a href="{% url 'cart:detallesProductos' producto.id_producto%}">
                         <img src="{{producto.imagen.url}}" alt="">
                    </a>
                 </div>
@@ -33,7 +33,7 @@
                 </p>
                 <div class="div_botones_padre">
                     <button class="botodes_lista_megusta">Comprar</button>
-                    <form method="POST" action="{% url 'eliminar_producto_lista_megusta' producto.id_producto %}">
+                    <form method="POST" action="{% url 'cart:eliminar_producto_lista_megusta' producto.id_producto %}">
                         {% csrf_token %}
                         <button type="submit" class="botodes_lista_megusta">Eliminar</button>
                     </form>

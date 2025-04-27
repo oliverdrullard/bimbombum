@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -66,7 +67,7 @@ class UsuarioLoginView(View):
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('cardprincipal')
+                return redirect('cart:cardprincipal')
             else:
                 return render(request, 'registracion/login.html', {'error': 'Email o contraseña inválidos'})
         return render(request, 'registracion/login.html', {'form': form, 'error': 'Datos inválidos'})
@@ -75,7 +76,7 @@ class UsuarioLoginView(View):
 class UsuarioLogout(View):
     def get(self, request):
         logout(request)
-        return redirect('cardprincipal')
+        return redirect('cart:cardprincipal')
 
 
 # Pantallas de las caregorias
@@ -116,7 +117,7 @@ class ResultadosBusquedaView(TemplateView):
 
 
 class lista_megusta_view(LoginRequiredMixin, View):
-   login_url = 'login'
+   login_url = 'cart:login'
    def get(self, request):
         lista_me_gusta = lista_megusta.objects.filter(usuario=request.user)
         productos = [item.producto for item in lista_me_gusta]
@@ -124,21 +125,21 @@ class lista_megusta_view(LoginRequiredMixin, View):
         return render(request, 'pantallas_usuarios/lista_megusta.html', {'productos': productos})
 
 class agregar_a_lista_megusta(LoginRequiredMixin, View):
-    login_url = 'login'
+    login_url = 'cart:login'
     def post(self, request, producto_id):
         producto = Producto.objects.get(id_producto=producto_id)
 
         if not lista_megusta.objects.filter(usuario=request.user, producto=producto).exists():
             lista_megusta.objects.create(usuario=request.user, producto=producto)
         
-        return redirect('lista_megusta')
+        return redirect('cart:lista_megusta')
 
 class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
     def post(self, request, producto_id):
         favorito = lista_megusta.objects.get(usuario=request.user,producto_id=producto_id)
         favorito.delete()
 
-        return redirect('lista_megusta')
+        return redirect('cart:lista_megusta')
 
 class carrito_view(View):
     def get(self, request):
