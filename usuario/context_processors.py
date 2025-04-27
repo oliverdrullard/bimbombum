@@ -1,6 +1,7 @@
 from .models import Categoria
 from .models import Producto
 from django.db.models import Q
+from .carrito import Cart
 
 def categorias_disponibles(request):
     categorias = Categoria.objects.filter(activo=True)
@@ -23,4 +24,8 @@ def barra_busqueda_context(request):
         'buscar_query': query,
         'resultados_busqueda': productos_resultado
     }
-    
+
+def cart_context(request):
+    return{
+        'cart': Cart(request),
+    }

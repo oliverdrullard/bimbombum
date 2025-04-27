@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/static/cabecera.css">
 
     <div id="elederecha">
-        <form action="{% url 'resultado_busqueda'%}" method="GET">
+        <form action="{% url 'cart:resultado_busqueda'%}" method="GET">
             <div class="buscador">
                 <button class="boton_buscar" type="submit">
                     <i class="fa-solid fa-magnifying-glass"></i> 
@@ -28,7 +28,7 @@
                                 <a href="#">{{ user.nombre }}</a>
                             </li>
                             <li>
-                                <a href="{% url 'logout' %}">Cerrar sesión</a>
+                                <a href="{% url 'cart:logout' %}">Cerrar sesión</a>
                             </li>
                         </ul>
                     </li>
@@ -41,10 +41,10 @@
                         </a>
                         <ul class="menu-vertical">
                             <li>
-                                <a href="{% url 'registro' %}">Crear cuenta</a>
+                                <a href="{% url 'cart:registro' %}">Crear cuenta</a>
                             </li>
                             <li>
-                                <a href="{% url 'login'%}">Iniciar sesion</a>
+                                <a href="{% url 'cart:login'%}">Iniciar sesion</a>
                             </li>
                         </ul>
                     </li>
@@ -52,19 +52,19 @@
             {% endif%}
         
         
-        <a href="{% url 'carrito'%}">
+        <a href="{% url 'cart:carrito'%}">
             <i class="fa-solid fa-cart-plus"></i>
             
         </a>
     </div>
     <div id="eleIzquierda">
-        <a href="{% url 'lista_megusta'%}">
+        <a href="{% url 'cart:lista_megusta'%}">
             <i class="fa-solid fa-heart"></i>
             
-        <a href="{% url 'pantallaMensajes'%}">
+        <a href="{% url 'cart:pantallaMensajes'%}">
             <i class="fa-regular fa-message"></i>
         </a>
-        <a href="{%url 'estado_pedidos'%}">
+        <a href="{%url 'cart:estado_pedidos'%}">
             <i class="fa-solid fa-truck-fast"></i>
             
         </a>
@@ -72,7 +72,7 @@
     </div>
     
     <div id="logo" class="nombre">
-        <a href="{% url 'cardprincipal'%}">
+        <a href="{% url 'cart:cardprincipal'%}">
             <img class="logo" src="/static/logos/Blou mmm.jpeg" alt="logo">
             <h2 class="titulo">BIM,BOM,BUM!</h2>
         </a>
@@ -81,9 +81,9 @@
 <hr>
 <nav class="nav_menu">
     <div class="navegacion">
-        <a href="{% url 'cardprincipal'%}" class="{% if not categoria %}activo{% endif %}">INICIO</a>
+        <a href="{% url 'cart:cardprincipal'%}" class="{% if not categoria %}activo{% endif %}">INICIO</a>
         {% for cat in categorias %}
-            <a href="{% url 'categoria' cat.id %}" class="{% if categoria.id == cat.id %}activo{% endif %} catego">
+            <a href="{% url 'cart:categoria' cat.id %}" class="{% if categoria.id == cat.id %}activo{% endif %} catego">
                 {{ cat.nombre|upper }}
             </a>
         {% endfor%}

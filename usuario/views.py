@@ -17,6 +17,7 @@ from .forms import UsuarioRegistroForm
 from .forms import UsuarioLoginForm
 from .models import Categoria
 from .models import lista_megusta
+from .carrito import Cart
 
 # registro de usuarios
 class UsuarioRegistro(View):
@@ -142,7 +143,28 @@ class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
 class carrito_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/carrito.html')
+    
+def agregar_al_carrito(request, producto_id):
+    cart = Cart(request)
+    producto = get_object_or_404(Producto, id_producto=producto_id)
+    cart.add(producto=producto, cantidad=1)
 
+    action = request.POST.get('action')
+
+    if action == 'increment':
+        cart.add(producto=producto, cantidad=1)
+    elif action == 'decrement':
+        cart.remove(producto)
+    return redirect('cart:ver_carrito')
+
+def eliminar_del_carrito(request, producto_id):
+    cart = Cart(request)
+    producto = get_object_or_404(Producto, id_producto=producto_id)
+    cart.remove(producto)
+    return redirect('cart:ver_carrito')
+
+def ver_carrito(request):
+    return render(request, 'pantallas_usuarios/carrito.html')
 
 class pantallaMensajes_view(View):
     def get(self, request):

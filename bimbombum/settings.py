@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuario',
 ]
+# settings.py
+
+CART_SESSION_ID = 'cart'
 
 AUTH_USER_MODEL = 'usuario.ModeloUsuario'
 
@@ -71,6 +74,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'usuario.context_processors.categorias_disponibles',
                 'usuario.context_processors.barra_busqueda_context',
+                'usuario.context_processors.cart_context',
 
             ],
         },

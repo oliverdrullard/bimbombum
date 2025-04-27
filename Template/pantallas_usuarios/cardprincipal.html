@@ -18,7 +18,7 @@
                   
                     <div class="card">
                         <figure>
-                            <a href="{% url 'detallesProductos' producto.id_producto%}">
+                            <a href="{% url 'cart:detallesProductos' producto.id_producto%}">
 
                                 <img src="{{ producto.imagen.url}} " alt="{{ producto.nombre }}"> 
                             </a>
@@ -27,8 +27,13 @@
                         <h5 class="nombre_articulo">{{ producto.nombre }}</h5>
                         <p class="precio">$ {{ producto.precio }}</p>
                         <div class="inform">
-                            <i class="fa-solid fa-cart-shopping " id="carito"></i>
-                            <form method="POST" action="{% url 'agregar_a_lista_me_gusta' producto.id_producto %}">
+                            <form method="POST" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
+                                {% csrf_token%}
+                                <button type="submit" class="boton-lista-megusta">
+                                    <i class="fa-solid fa-cart-shopping " id="carito"></i>
+                                </button>
+                            </form>
+                            <form method="POST" action="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}">
                                 {% csrf_token%}
                                 <button type="submit" class="boton-lista-megusta">
                                     <i class="fa-solid fa-heart" id="corazon"></i>

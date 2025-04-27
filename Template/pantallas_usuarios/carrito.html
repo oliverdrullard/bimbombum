@@ -12,18 +12,19 @@
         <h3 class="titulo_megusta">&#128722;Carrito</h3>
     </div>
     <section class="seccion-carrito">
+        {% for item in cart %}
         <hr>
         <div class="informacion-carrito">
             
            <div class="div-imagen">
-            <img src="/media/static/abrigo_hombre1.jpg" alt="imagen-producto" class="imagen-producto">
+            <img src="{{ item.producto.imagen.url }}" alt="imagen-producto" class="imagen-producto">
            </div>
 
            <div class="div-informacion-carrito">
-                <div class="div-precio"><p class="precio"><b>$12.99</b></p></div>
+                <div class="div-precio"><p class="precio"><b>${{ item.precio }}</b></p></div>
                 <p class="nombre-producto"><b>Nombre del producto</b></p>
                 <div class="stock">
-                    <span><img src="/static/logos/en-stock.png" alt="stock" class="imagen-stock">50</span>
+                    <span><img src="/static/logos/en-stock.png" alt="stock" class="imagen-stock">{{ item.producto.stock}}</span>
                     <div class="div-stock">
                         <p>In stock</p>
                     </div>
@@ -48,19 +49,36 @@
                 </select>
 
                 <div class="div-cantidad">
-                    <button class="boton-menos" id="menos">-</button>
-                    <input type="number" min="1" value="1" class="cantidad">
-                    <button class="boton-mas" id="mas">+</button>
+                    <input type="number" min="1" value="{{ item.cantidad }}" class="cantidad">
+
+                    <form action="{% url 'cart:agregar_al_carrito' producto_id=item.producto.id_producto %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" name="action" value="increment" class="boton-mas">+</button>
+                    </form>
                 </div>
               </div>
                 <br>
-                <button class="comprar"><i class="fas fa-credit-card"></i>Comprar</button>
-                <button class="eliminar"><i class="fas fa-trash"></i>Elimnar</button>
+                <button class="comprar" value="decrement" name="action"><i class="fas fa-credit-card"></i>Comprar</button>
+                <form action="{% url 'cart:eliminar_del_carrito' producto_id=item.producto.id_producto %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="eliminar">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </form>
+
+                <div class="div-subtotal">
+                    <p><strong>${{ item.total }}</strong></p>
+                </div>
             </div>
-           
+            
         </div>
         <hr>
+        {% endfor %}
+        <div>
+            <p class="total"><strong>${{ cart.get_total_price }}</strong></p>
+        </div>
     </section>
+    
     {% endblock%}
 
     

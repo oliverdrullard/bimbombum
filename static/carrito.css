@@ -146,3 +146,26 @@ span > img{
 .eliminar > i{
   margin-right: 10px;
 }
+.div-subtotal{
+  float: right;
+  margin-top: 10px;
+  width: 150px;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  
+}
+.div-subtotal p{
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.total{
+  font-size: 30px;
+  float: right;
+  margin-bottom: 20px;
+
+}
