@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/registro.css">
 
 
-    <form class="formulario" method="post" enctype="multipart/form-data" action="{% url 'registro' %}"> 
+    <form class="formulario" method="post" enctype="multipart/form-data" action="{% url 'cart:registro' %}"> 
         {% csrf_token %}
         <h1>Registrate</h1>
         <div class="contenedor__registro">
@@ -51,7 +51,7 @@
             </div>
             <button type="submit" value="Registrate" class="button">Registar</button>
             <P>Al registrarte, aceptas los terminos y condiciones</P>
-            <p>¿Ya tienes una cuenta?<a class="link" href="{% url 'login'%}">Iniciar sesión</a></p>
+            <p>¿Ya tienes una cuenta?<a class="link" href="{% url 'cart:login'%}">Iniciar sesión</a></p>
 
         </div>
     </form>

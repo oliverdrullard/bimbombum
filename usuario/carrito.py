@@ -18,6 +18,9 @@ class Cart:
             self.cart[producto_id]['cantidad'] = cantidad
         else:
             self.cart[producto_id]['cantidad'] += cantidad
+            
+        if self.cart[producto_id]['cantidad'] <= 0:
+            del self.cart[producto_id]
         self.save()
 
     def save(self):
@@ -29,6 +32,12 @@ class Cart:
             del self.cart[producto_id]
             self.save()
 
+    def get_cantidad(self, producto):
+        producto_id = str(producto.id_producto)
+        if producto_id in self.cart:
+            return self.cart[producto_id]['cantidad']
+        return 0
+    
     def __iter__(self):
         producto_ids = self.cart.keys()
         productos = Producto.objects.filter(id_producto__in=producto_ids)

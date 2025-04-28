@@ -33,23 +33,23 @@
 
               <div class="div-botones-cnat-sezi-color">
                 <select name="tallas" id="tallas" class="talla">
-                    <option value="small">S</option>
-                    <option value="medium">M</option>
-                    <option value="large">L</option>
-                    <option value="extralarge ">XL</option>
-                    <option value="extraextralarge">XXL</option>
+                    {% for talla in item.producto.lista_tallas %}
+                    <option value="{{ talla }}">{{ talla}}</option>
+                    {% endfor %}
                 </select>
 
                 <select name="color" id="color" class="colores">
-                    <option value="blanco">Blanco</option>
-                    <option value="negro">Negro</option>
-                    <option value="azul">Azul</option>
-                    <option value="verde">Verde</option>
-                    <option value="morado">Morado</option>
+                    {% for color in item.producto.lista_colores %}
+                    <option value="{{ color }}">{{ color }}</option>
+                    {% endfor %} 
                 </select>
 
                 <div class="div-cantidad">
-                    <input type="number" min="1" value="{{ item.cantidad }}" class="cantidad">
+                    <form method="post" action="{% url 'cart:agregar_al_carrito' producto_id=item.producto.id_producto %}">
+                        {% csrf_token %}
+                        <button type="submit" class="boton-menos" id="menos" name="action" value="decrement">-</button>
+                    </form>
+                    <input type="number" min="1" max="{{ producto.stock }}" name="cantidad" value="{{ item.cantidad }}" class="cantidad">
 
                     <form action="{% url 'cart:agregar_al_carrito' producto_id=item.producto.id_producto %}" method="post" style="display: inline;">
                         {% csrf_token %}

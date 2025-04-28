@@ -81,7 +81,7 @@ class Producto(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.CharField(max_length=200)
     material = models.CharField(max_length=100, default='N/A')
-    zise1 = models.TextField(default="",help_text="Tallas separadas por coma: S,M,L")
+    zise1 = models.TextField(default="", help_text="Tallas separadas por coma: S,M,L")
     colores = models.TextField(default="", help_text="colores separados por coma: rojo,azul,verde")
     imagen = models.ImageField(upload_to='static/')
     categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)

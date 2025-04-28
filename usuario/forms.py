@@ -48,17 +48,19 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Producto
 
-        fields = ['nombre', 'descripcion', 'colores', 'imagen', 'categoria', 'precio','stock','activo']
+        fields = ['nombre', 'descripcion', 'colores', 'zise1', 'imagen', 'categoria', 'precio','stock','activo']
 
         widgets = {
             'nombre': forms.TextInput(attrs={'class':'form-control formcontrol campo_producto'}),
             'descripcion': forms.TextInput(attrs={'class':'form-control descrip formcontrol campo_producto'}),
-            'colores': forms.TextInput(attrs={'class':'form-control formcontrol campo_producto'}),
+            'colores': forms.TextInput(attrs={'class':'form-control formcontrol campo_producto','placeholder':'Negro,Verde,Azul'}),
+            'zise1': forms.TextInput(attrs={'class':'form-control formcontrol campo_producto','placeholder':'S,M,L'}),
             'imagen': forms.FileInput(attrs={'class':'form-control formcontrol campo_producto'}),
             'categoria': forms.Select(attrs={'class':'form-control formcontrol campo_producto'}),
             'precio': forms.NumberInput(attrs={'class':'form-control formcontrol campo_producto '}),
             'stock': forms.NumberInput(attrs={'class':'form-control formcontrol campo_producto '}),
             'activo': forms.CheckboxInput(attrs={'class':'sin_cls '}),
+            
         }
 
  
