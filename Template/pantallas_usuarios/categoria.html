@@ -24,7 +24,12 @@
                         <h5 class="nombre_articulo">{{ producto.nombre }}</h5>
                         <p class="precio">$ {{ producto.precio }}</p>
                         <div class="inform">
-                            <i class="fa-solid fa-cart-shopping"></i>
+                            <form method="POST" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
+                                {% csrf_token%}
+                                <button type="submit" class="boton-lista-megusta">
+                                    <i class="fa-solid fa-cart-shopping " id="carito"></i>
+                                </button>
+                            </form>
                             <form method="POST" action="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}">
                                 {% csrf_token%}
                                 <button type="submit" class="boton-lista-megusta">

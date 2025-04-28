@@ -28,12 +28,13 @@
                         <li>{{producto.material}}.</li>
                     </ul>
                     <div class="div-botones">
-                        <div class="div-cantidad">
-                            <button class="boton-menos" id="menos">-</button>
-                            <input type="number" min="1" value="1" class="cantidad">
-                            <button class="boton-mas" id="mas">+</button>
-                        </div>
-                        <button class="boton-carrito">Añadir al carrito</button>
+                        <form method="POST" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
+                            {% csrf_token %}
+                            <div class="div-cantidad">
+                                <input type="number" name="cantidad" min="1" max="{{ item.producto.stock }}" value="1" class="cantidad">
+                            </div>
+                            <button type="submit" class="boton-carrito">Añadir al carrito</button>
+                        </form>
                     </div>
                     <form method="POST" action="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}">
                         {% csrf_token %}

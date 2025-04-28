@@ -2,12 +2,11 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from django.db.models import Q 
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.contrib import messages
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -148,14 +147,25 @@ class carrito_view(View):
 def agregar_al_carrito(request, producto_id):
     cart = Cart(request)
     producto = get_object_or_404(Producto, id_producto=producto_id)
-    cart.add(producto=producto, cantidad=1)
 
+    cantidad_solicitada = int(request.POST.get('cantidad', 1))
     action = request.POST.get('action')
 
+    # Obtenemos la cantidad actual del producto en el carrito
+    cantidad_actual = cart.get_cantidad(producto)
+
     if action == 'increment':
-        cart.add(producto=producto, cantidad=1)
+        nueva_cantidad = cantidad_actual + 1
+        if nueva_cantidad <= producto.stock:
+            cart.add(producto=producto, cantidad=1)
     elif action == 'decrement':
-        cart.remove(producto)
+        nueva_cantidad = cantidad_actual - 1
+        if nueva_cantidad >= 1:
+            cart.add(producto=producto, cantidad=-1)
+    else:
+        if cantidad_solicitada <= producto.stock:
+            cart.add(producto=producto, cantidad=cantidad_solicitada)
+
     return redirect('cart:ver_carrito')
 
 def eliminar_del_carrito(request, producto_id):
@@ -198,6 +208,6 @@ class agregar_producto_view(View):
 
 
 class lista_producto_view(View):
-    def get(self, reuqest):
+    def get(self, request):
         productos = Producto.objects.filter(activo=True)
-        return render(reuqest, 'manegador/lista_producto.html', {'productos': productos})
+        return render(request, 'manegador/lista_producto.html', {'productos': productos})
