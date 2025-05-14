@@ -191,6 +191,10 @@ class Estado_pedivo_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/estado_pedidos.html')
 
+class Confirmar_pedido(View):
+    def get(self, request):
+        return render(request, 'pantallas_usuarios/confipedido.html')
+
 # Parte del manegador de la pagina
 
 

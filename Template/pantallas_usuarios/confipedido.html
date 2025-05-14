@@ -1,0 +1,83 @@
+{% extends "app.html"%}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'confipedido.css' %}">
+    <section class="sec-confirmar-pedido">
+        <div class="div-titulo">
+            <h3 class="titulo-confipedido">Comfirmar pedido</h3>
+        </div>
+
+        <div class="div-informacion-padre">
+            <div class="form-informacion-envio">
+                
+                <div class="info-cliente">
+                    <h2>Informacion de envio </h2>
+                    <form action="">
+                        <div>
+                            <input type="text" placeholder="Nombre" class="form-informacion">
+                        </div>
+                        <div>
+                            <input type="tel" placeholder="Telefono" class="form-informacion">
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Provincia" class="form-informacion">
+                        </div>
+                        <div>
+                            <input type="text" placeholder="Sector barrio calle casa" class="form-informacion">
+                        </div>
+                       <div>
+                        <input type="text" placeholder="Referencia de la direccion" class="form-informacion">
+                       </div>
+                       <h2>Forma de pago </h2>
+                    </form>
+                </div>
+
+                <div class="info-pago">
+                    <form action="">
+                        <div class="form-forma-pago">
+                            <div>
+                                <input type="radio" class="input-forma-pago">
+                                <i class="fa-solid fa-credit-card"></i>
+                                <label for="">Tarjeta de credito, devito, etc....</label>
+                            </div>
+                            <div>
+                                <input type="radio" class="input-forma-pago">
+                                <i class="fa-solid fa-money-bill-1"></i>
+                                <label for="">Pago contra entrega</label>
+                            </div>
+                            <div>
+                                <input type="radio" class="input-forma-pago">
+                                <i class="fa-brands fa-cc-paypal"></i>
+                                <label for="">PayPal</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                   
+            </div>
+
+            <div class="informacion-producto">
+                    <div>
+                        <figcaption>
+                            <img src="/static/imagenes/imagen13.jpg" alt="imagen producto">
+                        </figcaption>
+                    </div>
+                    <div class="div-informacion-producto">
+                        <p>Nombre del producto</p>
+                    
+                        <p>$12.99</p>
+                        
+                    </div>
+
+
+            </div>
+
+        </div>
+        <div class="div-boton-confi-total">
+            <p class=""><strong>Total: $1200</strong> </p>
+            <button type="submit" class="boton-confirma-pedido"> Confirmar </button>
+        </div>
+        
+    </section>
+{% endblock%}

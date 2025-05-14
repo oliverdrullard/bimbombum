@@ -1,0 +1,101 @@
+.sec-confirmar-pedido{
+    width: 50%;
+    margin: auto;
+}
+.div-titulo{
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 250px;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+}
+
+.div-informacion-padre{
+    border: 2px solid #dad1d1;
+    border-radius: 20px ;
+    margin-top: 20px;
+    display: flex;
+}
+
+.form-informacion-envio{
+    width: 600px;
+    border-right: 2px solid #dad1d1;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.info-cliente{
+    width: 600px;
+    margin-top: auto;
+    text-align: center;
+    justify-content: center;
+
+    
+}
+.form-informacion{
+    width: 300px;
+    height: 40px;
+    border-radius: 10px ;
+    margin: 10px;
+    padding: 5px;
+
+}
+
+.info-pago{
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    margin-left: 100px;
+    
+}
+
+.input-forma-pago{
+    width: 15px;
+    height: 15px;
+    
+}
+
+.informacion-producto{
+    width: 300px;
+    height: 100px;
+    margin-left: 10px;
+    margin-top: 10px;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+figcaption img {
+    width: 5rem;
+    height: 6rem;
+    border-radius: 10px;
+    margin-right: 5px;
+    
+  
+  }
+
+  .div-boton-confi-total{
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+  }
+
+  .div-boton-confi-total p{
+    float: right;
+    font-size: 25px;
+
+  }
+
+  .boton-confirma-pedido{
+    width: 150px;
+    border: none;
+    border-radius: 15px;
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
+    padding: 5px;
+    
+
+  }
