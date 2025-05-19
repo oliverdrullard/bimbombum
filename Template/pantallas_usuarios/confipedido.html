@@ -13,70 +13,68 @@
                 
                 <div class="info-cliente">
                     <h2>Informacion de envio </h2>
-                    <form action="">
+                    <form id="pedido" action="" method="post">
+                        {% csrf_token %}
                         <div>
-                            <input type="text" placeholder="Nombre" class="form-informacion">
+                            {{ form.nombre }}
                         </div>
                         <div>
-                            <input type="tel" placeholder="Telefono" class="form-informacion">
+                            {{ form.telefo }}
                         </div>
                         <div>
-                            <input type="text" placeholder="Provincia" class="form-informacion">
+                            {{ form.provincia }}
                         </div>
                         <div>
-                            <input type="text" placeholder="Sector barrio calle casa" class="form-informacion">
+                            {{ form.sector }}
                         </div>
                        <div>
-                        <input type="text" placeholder="Referencia de la direccion" class="form-informacion">
+                            {{ form.referencia }}
                        </div>
-                       <h2>Forma de pago </h2>
-                    </form>
-                </div>
-
-                <div class="info-pago">
-                    <form action="">
-                        <div class="form-forma-pago">
-                            <div>
-                                <input type="radio" class="input-forma-pago">
-                                <i class="fa-solid fa-credit-card"></i>
-                                <label for="">Tarjeta de credito, devito, etc....</label>
-                            </div>
-                            <div>
-                                <input type="radio" class="input-forma-pago">
-                                <i class="fa-solid fa-money-bill-1"></i>
-                                <label for="">Pago contra entrega</label>
-                            </div>
-                            <div>
-                                <input type="radio" class="input-forma-pago">
-                                <i class="fa-brands fa-cc-paypal"></i>
-                                <label for="">PayPal</label>
-                            </div>
+                       
+                       <div class="form-forma-pago">
+                            <h2>Forma de pago </h2>
+                            {% for radio in form.forma_pago %}
+                                <div>
+                                    {{ radio.tag }}
+                                    {% if "tarjeta" in radio.choice_label|lower %}
+                                        <i class="fa-solid fa-credit-card"></i>
+                                    {% elif "contra entrega" in radio.choice_label|lower %}
+                                        <i class="fa-solid fa-money-bill-1"></i>
+                                    {% elif "paypal" in radio.choice_label|lower %}
+                                        <i class="fa-brands fa-cc-paypal"></i>
+                                    {% endif %}
+                                    <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                                </div>
+                            {% endfor %}
                         </div>
                     </form>
                 </div>
                    
             </div>
+            
+                {% for item in productos %}
+                <div class="informacion-producto">
+                        <div>
+                            <figcaption>
+                                <img src="{{item.producto.imagen.url}}" alt="item.producto.nombre">
+                            </figcaption>
+                        </div>
+                        <div class="div-informacion-producto">
+                            <p><strong>{{ item.producto.nombre }}</strong></p>
+                            <p>Precio: ${{ item.producto.precio }}</p>
+                            <p>Subtotal: ${{ item.subtotal }}</p>
 
-            <div class="informacion-producto">
-                    <div>
-                        <figcaption>
-                            <img src="/static/imagenes/imagen13.jpg" alt="imagen producto">
-                        </figcaption>
-                    </div>
-                    <div class="div-informacion-producto">
-                        <p>Nombre del producto</p>
-                    
-                        <p>$12.99</p>
-                        
-                    </div>
+                            
+                        </div>
 
 
-            </div>
-
+                </div>
+            {% endfor %}
+            
         </div>
         <div class="div-boton-confi-total">
-            <p class=""><strong>Total: $1200</strong> </p>
-            <button type="submit" class="boton-confirma-pedido"> Confirmar </button>
+            <p class=""><strong>Total: ${{ total }}</strong> </p>
+            <button form="pedido" type="submit" class="boton-confirma-pedido"> Confirmar </button>
         </div>
         
     </section>

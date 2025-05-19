@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils import timezone
 from django.contrib import messages
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
@@ -15,8 +16,11 @@ from .models import Carrusel
 from .forms import ProductForm
 from .forms import UsuarioRegistroForm
 from .forms import UsuarioLoginForm
+from .forms import DatosEnviadosForm
 from .models import Categoria
 from .models import lista_megusta
+from .models import DetallePedido
+from .models import Pedido
 from .carrito import Cart
 
 # registro de usuarios
@@ -142,18 +146,20 @@ class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
 
 class carrito_view(View):
     def get(self, request):
-        return render(request, 'pantallas_usuarios/carrito.html')
+        cart = Cart(request)
+        # print("Contenido del carrito en  la sesion:", request.session.get('carrito'))
+        return render(request, 'pantallas_usuarios/carrito.html', {'cart':cart})
     
 def agregar_al_carrito(request, producto_id):
     cart = Cart(request)
     producto = get_object_or_404(Producto, id_producto=producto_id)
-
+    
     cantidad_solicitada = int(request.POST.get('cantidad', 1))
     action = request.POST.get('action')
 
     # Obtenemos la cantidad actual del producto en el carrito
     cantidad_actual = cart.get_cantidad(producto)
-
+    
     if action == 'increment':
         nueva_cantidad = cantidad_actual + 1
         if nueva_cantidad <= producto.stock:
@@ -175,7 +181,9 @@ def eliminar_del_carrito(request, producto_id):
     return redirect('cart:ver_carrito')
 
 def ver_carrito(request):
-    return render(request, 'pantallas_usuarios/carrito.html')
+    cart = Cart(request)
+    print("Contenido del carrito en  la sesion:", request.session.get('carrito'))
+    return render(request, 'pantallas_usuarios/carrito.html', {'cart':cart})
 
 class pantallaMensajes_view(View):
     def get(self, request):
@@ -189,12 +197,105 @@ class quienes_somos_view(View):
     
 class Estado_pedivo_view(View):
     def get(self, request):
-        return render(request, 'pantallas_usuarios/estado_pedidos.html')
+        pedidos = Pedido.objects.all()
+        detalles = DetallePedido.objects.filter(pedido__in=pedidos) 
 
+        print(f"Estos son los pedidos:", pedidos)
+        for pedido in pedidos:
+            print(f'Numero de pedido: {pedido.numero_pedidos}')
+            print(f'Estado del pedido: {pedido.estado}')
+            print(f'Usuario: {pedido.idusuario}')
+            print(f'ID pedido: {pedido.id_pedido}')
+
+        for detalle in detalles:
+            print(f'Producto: {detalle.producto}')
+            print(f'Producto: {detalle.precio_unitario}')
+            print(f'Producto: {detalle.cantidad}')
+
+        return render(request, 'pantallas_usuarios/estado_pedidos.html')
+    
 class Confirmar_pedido(View):
     def get(self, request):
-        return render(request, 'pantallas_usuarios/confipedido.html')
+        carrito = request.session.get('carrito',{})
+        productos_ids = carrito.keys()
+        productos_db = Producto.objects.filter(id_producto__in=productos_ids)
 
+        productos = []
+        total = 0
+
+        for producto in productos_db:
+            produc = carrito.get(str(producto.id_producto), 0 )
+            cantidad = produc.get('cantidad', 0)
+            subtotal = producto.precio * cantidad
+            total += subtotal
+            productos.append({
+                'producto': producto,
+                'cantidad': cantidad,
+                'subtotal': subtotal
+            })
+
+        form = DatosEnviadosForm()
+        return render(request, 'pantallas_usuarios/confipedido.html', {
+            'form': form,
+            'productos': productos,
+            'total': total,
+        })
+
+    def post(self, request):
+        carrito = request.session.get('carrito',{})
+        form = DatosEnviadosForm(request.POST)
+
+        if form.is_valid():
+            pedido = Pedido.objects.create(
+                numero_pedidos = timezone.now().timestamp(),
+                estado = "Pendiente",
+                idusuario = request.user,
+                
+              )
+            datos_envio = form.save(commit=False)
+            datos_envio.pedido = pedido
+            datos_envio.save()
+
+
+            productos_db = Producto.objects.filter(id_producto__in=carrito.keys())
+
+            for producto in productos_db:
+                item = carrito.get(str(producto.id_producto), 0)
+                cantidad = item.get('cantidad',0)
+                # precio = item.get('precio',producto.precio)
+
+                DetallePedido.objects.create(
+                    pedido = pedido,
+                    producto = producto,
+                    cantidad = cantidad,
+                    precio_unitario = producto.precio
+                )
+            
+            request.session.pop('carrito', None)
+            return redirect('cart:estado_pedidos')
+        
+        productos_ids = carrito.keys()
+        productos_db = Producto.objects.filter(id_prodcuto__in=productos_ids)
+
+        productos = []
+        total = 0
+
+        for producto in productos_db:
+            item = carrito.get(str(producto.id_producto),0)
+            cantidad = item.get('cantidad', 0)
+            subtotal = producto.precio * cantidad
+            total += subtotal
+            productos.append({
+                'producto': producto,
+                'cantidad': cantidad,
+                'subtotal': subtotal
+            })
+
+        return render(request,'pantallas_usuarios/confipedido.html',{
+            'form': form,
+            'productos': productos,
+            'total': total,
+        })
 # Parte del manegador de la pagina
 
 

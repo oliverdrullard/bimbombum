@@ -102,11 +102,30 @@ class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key= True)
     numero_pedidos = models.IntegerField()
     estado = models.CharField(max_length=100,choices=[('Pendiente','Pendiente'),('Enviado','Enviado'),('Entragado','Entregado')])
-    idusuario = models.ForeignKey(Lista_usuario,on_delete=models.CASCADE)
-    idproducto = models.ForeignKey(Producto,on_delete=models.CASCADE)
+    idusuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    producto = models.ManyToManyField('Producto', through='DetallePedido')
 
     def __str__(self):
-        return self.numero_pedidos
+        return str(self.numero_pedidos)
+
+class DetallePedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+class DatosEnvio(models.Model):
+    pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
+    telefo = models.CharField(max_length=20)
+    provincia = models.CharField(max_length=100)
+    sector = models.CharField(max_length=100)
+    referencia = models.CharField(max_length=255)
+    forma_pago = models.CharField(max_length=50, choices=[
+        ('tarjeta de credito o devito', 'Tarjeta de credito o devito'),
+        ('pago contra entrega','Pago contra entrega'),
+        ('paypal','Paypal'),
+    ])
 
 class Factura(models.Model):
     id_factura = models.AutoField(primary_key=True)
