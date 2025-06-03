@@ -101,7 +101,7 @@ class Producto(models.Model):
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key= True)
     numero_pedidos = models.IntegerField()
-    estado = models.CharField(max_length=100,choices=[('Pendiente','Pendiente'),('Enviado','Enviado'),('Entragado','Entregado')])
+    estado = models.CharField(max_length=100,choices=[('recibido','recibido'),('preparando','preparando'),('empacado','empacado'),('encamino','encamino'),("entregado","entregado")])
     idusuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     producto = models.ManyToManyField('Producto', through='DetallePedido')
 

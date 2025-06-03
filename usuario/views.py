@@ -20,6 +20,7 @@ from .forms import DatosEnviadosForm
 from .models import Categoria
 from .models import lista_megusta
 from .models import DetallePedido
+from .models import DatosEnvio
 from .models import Pedido
 from .carrito import Cart
 
@@ -194,25 +195,59 @@ class quienes_somos_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/quienes_somos.html')
     
-    
+  
 class Estado_pedivo_view(View):
-    def get(self, request):
-        pedidos = Pedido.objects.all()
-        detalles = DetallePedido.objects.filter(pedido__in=pedidos) 
-
-        print(f"Estos son los pedidos:", pedidos)
-        for pedido in pedidos:
-            print(f'Numero de pedido: {pedido.numero_pedidos}')
-            print(f'Estado del pedido: {pedido.estado}')
-            print(f'Usuario: {pedido.idusuario}')
-            print(f'ID pedido: {pedido.id_pedido}')
+     
+     ESTADO_PROGRESO = {
+    'recibido': 1,
+    'preparando': 2,
+    'empacado': 3,
+    'encamino': 4,
+    'entregado': 5,
+} 
+     
+     def get(self, request):
+        pedidos = Pedido.objects.all().select_related('idusuario')
+        detalles = DetallePedido.objects.filter(pedido__in=pedidos).select_related('producto')
+        datos_envio = DatosEnvio.objects.filter(pedido__in=pedidos)
+        
+        detalles_por_pedido = {} # Agrupar  los productos por pedido
+        envio_por_pedido = {} # Datos de envios por pedido
 
         for detalle in detalles:
-            print(f'Producto: {detalle.producto}')
-            print(f'Producto: {detalle.precio_unitario}')
-            print(f'Producto: {detalle.cantidad}')
+            detalle.subtotal = detalle.cantidad * detalle.precio_unitario 
+            detalles_por_pedido.setdefault(detalle.pedido.id_pedido,[]).append(detalle)
+       
+        for envio in datos_envio:
+            envio_por_pedido[envio.pedido_id] = envio
 
-        return render(request, 'pantallas_usuarios/estado_pedidos.html')
+        total_estado =  len(self.ESTADO_PROGRESO)
+
+        pedidos_info = []
+        for pedido in pedidos:
+            detalles = detalles_por_pedido.get(pedido.id_pedido,[])
+            total = sum(d.cantidad * d.precio_unitario for d in detalles)
+            envio = envio_por_pedido.get(pedido.id_pedido)
+            tatal_con_envio = total + (5 if envio else 0)
+
+            estado_actual = pedido.estado.lower()
+            progreso =  self.ESTADO_PROGRESO.get(estado_actual,0)
+            print(progreso)
+            porcentaje_progreso = int(progreso / total_estado * 100)
+
+
+            pedidos_info.append({
+                'pedido': pedido,
+                'usuario': pedido.idusuario,
+                'detalles': detalles,
+                'envio': envio,
+                'total': total,
+                'progreso': progreso,
+                'porcentaje_progreso': porcentaje_progreso,
+            })
+        return render(request,'pantallas_usuarios/estado_pedidos.html',{
+            'pedidos_info':pedidos_info
+        })
     
 class Confirmar_pedido(View):
     def get(self, request):
@@ -248,7 +283,7 @@ class Confirmar_pedido(View):
         if form.is_valid():
             pedido = Pedido.objects.create(
                 numero_pedidos = timezone.now().timestamp(),
-                estado = "Pendiente",
+                estado = "recibido",
                 idusuario = request.user,
                 
               )

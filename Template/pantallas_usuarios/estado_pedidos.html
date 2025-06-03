@@ -5,44 +5,71 @@
     <link rel="stylesheet" href="/static/estado_pedido.css">
 
     <section class="seccion-seguimiento-pedido">
-        <h2 class="pedido-num">Pedido:445342</h2>
+    {% for pedido_info in pedidos_info %}
+        <h2 class="pedido-num">{{ pedido_info.pedido.numero_pedidos }}</h2>
 
         <div class="padre-informacion-pedido">
-            <div class="estatus-pedido">
-                <p><strong>Pedido recibido</strong><span class="estado-recidido progreso" >100%</span></p>
-                <p><strong>Preparando</strong><span class="estado-preparando progreso" >50%</span></p>
-                <p><strong>Empacando</strong><span class="estado-empacando progreso" >0%</span></p>
-                <p><strong>Encamido</strong><span class="estado-encamido progreso" >0%</span></p>
-                <p><strong>Entregado</strong><span class="estado-entregado progreso" >0%</span></p>
+            <div class="barra-contenedor">
+                <div class="barra
+                {% if pedido_info.porcentaje_progreso <= 30 %}
+                    rojo
+                {% elif pedido_info.porcentaje_progreso <= 60 %}
+                    amarillo
+                {% elif pedido_info.porcentaje_progreso <= 80 %}
+                    azul
+                {% else %}
+                    verde
+                {% endif %}"
+                style="width: {{ pedido_info.porcentaje_progreso }}%;">
+                </div>
             </div>
+            <div class="procesos">
+                        <div class="colores">
+                            <div class="di-rojo"></div>
+                            <p>Recibido</p>
+                        </div>
+                        <div class="colores">
+                            <div class="di-amarrillo"></div>
+                            <p>Preparanddi-o y empacando</p>
+                        </div>
+                        <div class="colores">
+                            <div class="di-azul"></div>
+                            <p>Enviado</p>
+                        </div>
+                        <div class="colores">
+                            <div class="di-verde"></div>
+                        <p>Entregado</p>
+                        </div>
+
+                    </div>
             <div class="informacion-pedido info">
                 <h4>&#128197; Informacion del pedido</h4>
-                <p>Fecha del pedido: 8 de marzo 2025</p>
-                <p>Fecha de entrega: 20 de marzo 2025</p>
-                <p>Formato de pago: contra entrega</p>
+                <p>{{ pedido_info.pedido.fecha_pedido }}</p>
+                <p>{{ pedido_info.pedido.fecha_entrega }}</p>
+                <p>{{ pedido_info.pedido.forma_pago }}</p>
             </div>
             <div class="informacion-prodcuto info">
                 <h4>&#128230; Productos comprados</h4>
-                <p><strong>Producto 1</strong></p>
-                <p>Nombre: Abrigo</p>
-                <p>Cantidad: 2</p>
-                <p>Precio unitario: $1000</p>
-                <p>Subtotal: 2000</p>
-                <p><strong>Producto 2</strong></p>
-                <p>Nombre: Abrigo</p>
-                <p>Cantidad: 2</p>
-                <p>Precio unitario: $1000</p>
-                <p>Subtotal: 2000</p>
+            {% for detalle in pedido_info.detalles %}
+                <p><strong>Producto {{ forloop.counter }}</strong></p>
+                <p><strong>Nombre:</strong> {{ detalle.producto.nombre }}</p>
+                <p><strong>Cantidad:</strong> {{ detalle.cantidad }}</p>
+                <p><strong>Precio por unidad:</strong> {{ detalle.precio_unitario }}</p>
+                <p><strong>Subtotal:</strong> {{ detalle.subtotal }}</p>
+                <hr>
+            {% endfor%}
             </div>
             <div class="informacion-envio info">
                 <h4>&#128205; Informacion de envio</h4>
-                <p>Sector: Cienfuegoso</p>
-                <p>Calle: 46</p>
-                <p>Casa: 38</p>
-                <p>Costo de envío: $5.00</p>
+            {% if pedido_info.envio %}
+                <p><strong>Povincia:</strong> {{ pedido_info.envio.provincia }}</p>
+                <p><strong>Sector:</strong> {{ pedido_info.envio.sector}}</p>
+                <p><strong>Direccion:</strong> {{pedido_info.envio.referencia}}</p>
+                <p><strong>Costo de envío:</strong> $5.00</p>
+            {% endif %}
             </div>
             <div class="total-pedido">
-                <p>&#128176;<strong>Total del pedido: $4,000</strong></p>
+                <p>&#128176;<strong>Total del pedido: {{ pedido_info.total}} </strong></p>
             </div>
             <div class="notificaciones">
                 <input type="checkbox">
@@ -50,7 +77,7 @@
 
             </div>
         </div>
-
+    {%endfor%}
     </section>
     
 
