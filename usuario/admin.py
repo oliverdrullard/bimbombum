@@ -13,6 +13,8 @@ from .models import Empleado
 from .models import Ventas
 from .models import Puesto
 from .models import Carrusel
+from .models import DetallePedido
+from .models import DatosEnvio
 
 
 
@@ -27,3 +29,5 @@ admin.site.register(Empleado)
 admin.site.register(Ventas)
 admin.site.register(Puesto)
 admin.site.register(Carrusel)
+admin.site.register(DetallePedido)
+admin.site.register(DatosEnvio)
