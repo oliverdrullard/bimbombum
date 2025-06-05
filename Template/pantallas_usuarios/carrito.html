@@ -58,7 +58,12 @@
                 </div>
               </div>
                 <br>
-                <button class="comprar" value="decrement" name="action"><i class="fas fa-credit-card"></i>Comprar</button>
+                <a href="{% url 'cart:Confirmar_pedido'%}">
+                    <button class="comprar" value="decrement" name="action">
+                        <i class="fas fa-credit-card"></i>Comprar
+                    </button>
+                </a>
+                
                 <form action="{% url 'cart:eliminar_del_carrito' producto_id=item.producto.id_producto %}" method="post" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="eliminar">

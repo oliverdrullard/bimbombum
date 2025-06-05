@@ -142,7 +142,8 @@ span > img{
 }
 
 .comprar > i{
-  margin-right: 10px;
+  margin-left: 10px;
+  color: #fff;
 }
 .eliminar > i{
   margin-right: 10px;
@@ -170,3 +171,4 @@ span > img{
   margin-bottom: 20px;
 
 }
+

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import ModeloUsuario
 from .models import Producto
+from .models import DatosEnvio 
 
 
 
@@ -63,4 +64,17 @@ class ProductForm(forms.ModelForm):
             
         }
 
- 
+class DatosEnviadosForm(forms.ModelForm):
+    class Meta:
+        model = DatosEnvio
+
+        fields = ['nombre','telefo','provincia','sector','referencia','forma_pago']
+
+        widgets = {
+            'nombre':forms.TextInput(attrs={'class': 'form-informacion', 'placeholder':'Nombre'}),
+            'telefo':forms.TextInput(attrs={'class': 'form-informacion', 'placeholder':'Telefono'}),
+            'provincia':forms.TextInput(attrs={'class': 'form-informacion', 'placeholder':'Povincia'}),
+            'sector':forms.TextInput(attrs={'class': 'form-informacion', 'placeholder':'Sector'}),
+            'referencia':forms.TextInput(attrs={'class': 'form-informacion', 'placeholder':'Referencia'}),
+            'forma_pago':forms.RadioSelect(attrs={'class': 'forma-pago-opcion'}),
+        }

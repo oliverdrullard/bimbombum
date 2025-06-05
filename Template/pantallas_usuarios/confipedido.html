@@ -1,0 +1,81 @@
+{% extends "app.html"%}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'confipedido.css' %}">
+    <section class="sec-confirmar-pedido">
+        <div class="div-titulo">
+            <h3 class="titulo-confipedido">Comfirmar pedido</h3>
+        </div>
+
+        <div class="div-informacion-padre">
+            <div class="form-informacion-envio">
+                
+                <div class="info-cliente">
+                    <h2>Informacion de envio </h2>
+                    <form id="pedido" action="" method="post">
+                        {% csrf_token %}
+                        <div>
+                            {{ form.nombre }}
+                        </div>
+                        <div>
+                            {{ form.telefo }}
+                        </div>
+                        <div>
+                            {{ form.provincia }}
+                        </div>
+                        <div>
+                            {{ form.sector }}
+                        </div>
+                       <div>
+                            {{ form.referencia }}
+                       </div>
+                       
+                       <div class="form-forma-pago">
+                            <h2>Forma de pago </h2>
+                            {% for radio in form.forma_pago %}
+                                <div>
+                                    {{ radio.tag }}
+                                    {% if "tarjeta" in radio.choice_label|lower %}
+                                        <i class="fa-solid fa-credit-card"></i>
+                                    {% elif "contra entrega" in radio.choice_label|lower %}
+                                        <i class="fa-solid fa-money-bill-1"></i>
+                                    {% elif "paypal" in radio.choice_label|lower %}
+                                        <i class="fa-brands fa-cc-paypal"></i>
+                                    {% endif %}
+                                    <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                   
+            </div>
+            
+                {% for item in productos %}
+                <div class="informacion-producto">
+                        <div>
+                            <figcaption>
+                                <img src="{{item.producto.imagen.url}}" alt="item.producto.nombre">
+                            </figcaption>
+                        </div>
+                        <div class="div-informacion-producto">
+                            <p><strong>{{ item.producto.nombre }}</strong></p>
+                            <p>Precio: ${{ item.producto.precio }}</p>
+                            <p>Subtotal: ${{ item.subtotal }}</p>
+
+                            
+                        </div>
+
+
+                </div>
+            {% endfor %}
+            
+        </div>
+        <div class="div-boton-confi-total">
+            <p class=""><strong>Total: ${{ total }}</strong> </p>
+            <button form="pedido" type="submit" class="boton-confirma-pedido"> Confirmar </button>
+        </div>
+        
+    </section>
+{% endblock%}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from datetime import timedelta
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
 
@@ -101,19 +103,56 @@ class Producto(models.Model):
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key= True)
     numero_pedidos = models.IntegerField()
-    estado = models.CharField(max_length=100,choices=[('Pendiente','Pendiente'),('Enviado','Enviado'),('Entragado','Entregado')])
-    idusuario = models.ForeignKey(Lista_usuario,on_delete=models.CASCADE)
-    idproducto = models.ForeignKey(Producto,on_delete=models.CASCADE)
+    fecha_pedido = models.DateTimeField(auto_now_add=True)
+    fecha_entrega = models.DateTimeField(blank=True, null=True)
+    forma_pago = models.CharField(max_length=20, default='')
+    estado = models.CharField(max_length=100,choices=[('recibido','recibido'),('preparando','preparando'),('empacado','empacado'),('encamino','encamino'),("entregado","entregado")])
+    idusuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    producto = models.ManyToManyField('Producto', through='DetallePedido')
+
+    def save(self,*args, **kwargs):
+        if not self.fecha_entrega:
+            self.fecha_entrega = timezone.now() + timedelta(days=15)
+        super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.numero_pedidos
+        return str(self.numero_pedidos)
 
+class DetallePedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    precio_unitario = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+
+    def __str__(self):
+        return str(self.pedido)
+    
+class DatosEnvio(models.Model):
+    pedido = models.OneToOneField(Pedido, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=100)
+    telefo = models.CharField(max_length=20)
+    provincia = models.CharField(max_length=100)
+    sector = models.CharField(max_length=100)
+    referencia = models.CharField(max_length=255)
+    forma_pago = models.CharField(max_length=50, choices=[
+        ('tarjeta de credito o devito', 'Tarjeta de credito o devito'),
+        ('pago contra entrega','Pago contra entrega'),
+        ('paypal','Paypal'),
+    ])
+
+    def __str__(self):
+        return str(self.nombre)
+    
 class Factura(models.Model):
     id_factura = models.AutoField(primary_key=True)
     numero_factura = models.IntegerField()
     monto = models.DecimalField(max_digits=100,decimal_places=4)
     idpedido = models.ForeignKey(Pedido,on_delete=models.CASCADE)
     # idlisataDeusuario = models.ForeignKey(Lista_usuario,on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return str(self.numero_factura)
+
 
 class Proveedores(models.Model):
     id_proveedor = models.AutoField(primary_key= True)

@@ -1,0 +1,118 @@
+.sec-confirmar-pedido{
+    width: 40%;
+    margin: auto;
+}
+.div-titulo{
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 250px;
+    text-align: center;
+    color: #fff;
+    background-color: #000;
+}
+
+.div-informacion-padre{
+    width: 100%;
+    border: 2px solid #cdbebe;
+    border-radius: 20px ;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.form-informacion-envio{
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.info-cliente{
+    width: 50%;
+    margin: auto;
+    
+}
+.form-informacion{
+    width: 300px;
+    height: 40px;
+    border-radius: 10px ;
+    margin: 10px;
+    padding: 5px;
+
+}
+.form-forma-pago{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+}
+
+/* .info-pago{
+    width: 300px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px; 
+} */
+
+.input-forma-pago{
+    width: 15px;
+    height: 15px;
+    
+}
+
+.informacion-producto{
+    width: 200px;
+    height: auto;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 2px;
+    display: flex;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.informacion-producto p{
+    margin-bottom: 2px;
+}
+figcaption img {
+    width: 5rem;
+    height: 6rem;
+    border-radius: 10px;
+    margin-right: 5px;
+    
+  
+  }
+
+  .div-boton-confi-total{
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+  }
+
+  .div-boton-confi-total p{
+    float: right;
+    font-size: 25px;
+
+  }
+
+  .boton-confirma-pedido{
+    width: 150px;
+    border: none;
+    border-radius: 15px;
+    background-color: #000;
+    color: #fff;
+    font-size: 20px;
+    padding: 5px;
+    
+
+  }
+
+
+/* .div-padre-info-producto{
+    width: 350px;
+    display: flex;
+    flex-wrap: wrap;  
+} */
