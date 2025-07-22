@@ -15,6 +15,7 @@ from .models import Puesto
 from .models import Carrusel
 from .models import DetallePedido
 from .models import DatosEnvio
+from .models import ModeloUsuario
 
 
 
@@ -31,3 +32,4 @@ admin.site.register(Puesto)
 admin.site.register(Carrusel)
 admin.site.register(DetallePedido)
 admin.site.register(DatosEnvio)
+admin.site.register(ModeloUsuario)

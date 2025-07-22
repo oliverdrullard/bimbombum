@@ -4,10 +4,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_protect
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.models import Group
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -23,6 +25,7 @@ from .models import DetallePedido
 from .models import DatosEnvio
 from .models import Pedido
 from .carrito import Cart
+from .decoradores import manegador,clientes
 
 # registro de usuarios
 class UsuarioRegistro(View):
@@ -50,8 +53,12 @@ class UsuarioRegistro(View):
                 nombre=form.cleaned_data['nombre'],
                 direccion=form.cleaned_data['direccion'],
                 formato_pago=form.cleaned_data['formato_pago']
-            )  
-            return redirect('cardprincipal')
+            )
+            
+            grupo_cliente, creado = Group.objects.get_or_create(name='usuarioCliente')
+            user.groups.add(grupo_cliente)
+            
+            return redirect('cart:cardprincipal')
         return render(request, 'registracion/registro.html', {'form': form, 'error': 'Datos inválidos'})
 
 # login del usuario 
@@ -63,18 +70,27 @@ class UsuarioLoginView(View):
     def post(self, request):
         form = UsuarioLoginForm(request.POST)
         if not form.is_valid():
-            print()
+            return render(request, 'registracion/login.html', {'form': form, 'error': 'Datos inválidos'})
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
 
             user = authenticate(request, email=email, password=password)
+
             if user is not None:
                 login(request, user)
-                return redirect('cart:cardprincipal')
+                
+                if user.groups.filter(name = 'usuarioManager').exists():
+                    return redirect('cart:index')
+                if user.groups.filter(name = 'usuarioCliente').exists():
+                    return redirect('cart:cardprincipal')
+                print(user.email_user)
+            
             else:
                 return render(request, 'registracion/login.html', {'error': 'Email o contraseña inválidos'})
+            
         return render(request, 'registracion/login.html', {'form': form, 'error': 'Datos inválidos'})
+        
         
 # para deslogear el usuario
 class UsuarioLogout(View):
@@ -101,7 +117,7 @@ class CategoriaView(TemplateView):
         context['carrusel'] = carrusel
         return context
 
-    
+
 class cardprincipal_view(View):
     def get(self, request):
         product = Producto.objects.filter(activo=True)
@@ -119,7 +135,7 @@ class ResultadosBusquedaView(TemplateView):
     template_name = 'pantallas_usuarios/resultado_busqueda.html'
     
 
-
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class lista_megusta_view(LoginRequiredMixin, View):
    login_url = 'cart:login'
    def get(self, request):
@@ -127,7 +143,8 @@ class lista_megusta_view(LoginRequiredMixin, View):
         productos = [item.producto for item in lista_me_gusta]
         
         return render(request, 'pantallas_usuarios/lista_megusta.html', {'productos': productos})
-
+   
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class agregar_a_lista_megusta(LoginRequiredMixin, View):
     login_url = 'cart:login'
     def post(self, request, producto_id):
@@ -137,7 +154,8 @@ class agregar_a_lista_megusta(LoginRequiredMixin, View):
             lista_megusta.objects.create(usuario=request.user, producto=producto)
         
         return redirect('cart:lista_megusta')
-
+    
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
     def post(self, request, producto_id):
         favorito = lista_megusta.objects.get(usuario=request.user,producto_id=producto_id)
@@ -145,6 +163,7 @@ class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
 
         return redirect('cart:lista_megusta')
 
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class carrito_view(View):
     def get(self, request):
         cart = Cart(request)
@@ -186,16 +205,17 @@ def ver_carrito(request):
     print("Contenido del carrito en  la sesion:", request.session.get('carrito'))
     return render(request, 'pantallas_usuarios/carrito.html', {'cart':cart})
 
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class pantallaMensajes_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/pantallaMensajes.html')
 
-
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class quienes_somos_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/quienes_somos.html')
     
-  
+@method_decorator(user_passes_test(clientes), name='dispatch')
 class Estado_pedivo_view(View):
      
      ESTADO_PROGRESO = {
@@ -248,7 +268,7 @@ class Estado_pedivo_view(View):
         return render(request,'pantallas_usuarios/estado_pedidos.html',{
             'pedidos_info':pedidos_info
         })
-    
+@method_decorator(user_passes_test(clientes), name='dispatch')   
 class Confirmar_pedido(View):
     def get(self, request):
         carrito = request.session.get('carrito',{})
@@ -333,7 +353,14 @@ class Confirmar_pedido(View):
         })
 # Parte del manegador de la pagina
 
+@method_decorator(login_required(login_url='/usuario/login/'), name='dispatch')
+@method_decorator(user_passes_test(manegador), name='dispatch')
+class index(View):
+    def get(self, request):
+        return render(request, 'index.html')
 
+@method_decorator(login_required(login_url='/usuario/login/'), name='dispatch')
+@method_decorator(user_passes_test(manegador), name='dispatch')
 class agregar_producto_view(View):
     def get(self, request):
         form = ProductForm()
@@ -347,6 +374,8 @@ class agregar_producto_view(View):
         return render(request, 'manegador/agregar_producto.html', {'form': form})
 
 
+@method_decorator(login_required(login_url='/usuario/login/'), name='dispatch')
+@method_decorator(user_passes_test(manegador), name='dispatch')
 class lista_producto_view(View):
     def get(self, request):
         productos = Producto.objects.filter(activo=True)

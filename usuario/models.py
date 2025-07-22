@@ -191,4 +191,5 @@ class Carrusel(models.Model):
     nombre = models.CharField(max_length=100)
     imagen = models.ImageField(upload_to='carrusel/')
 
-# olivercontreras919@gmail.com, 123456789
+# olivercontreras919@gmail.com, 123456789 manager
+# caspian@gmail.com,oliver0125 cliente
