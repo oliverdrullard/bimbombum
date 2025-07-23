@@ -229,7 +229,7 @@ class Estado_pedivo_view(View):
 } 
      
      def get(self, request):
-        pedidos = Pedido.objects.all().select_related('idusuario')
+        pedidos = Pedido.objects.filter(idusuario=request.user).select_related('idusuario')
         detalles = DetallePedido.objects.filter(pedido__in=pedidos).select_related('producto')
         datos_envio = DatosEnvio.objects.filter(pedido__in=pedidos)
         
