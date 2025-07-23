@@ -58,6 +58,8 @@ class UsuarioRegistro(View):
             grupo_cliente, creado = Group.objects.get_or_create(name='usuarioCliente')
             user.groups.add(grupo_cliente)
             
+            login(request, user)
+
             return redirect('cart:cardprincipal')
         return render(request, 'registracion/registro.html', {'form': form, 'error': 'Datos inválidos'})
 
