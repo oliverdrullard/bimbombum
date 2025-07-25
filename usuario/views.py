@@ -86,7 +86,6 @@ class UsuarioLoginView(View):
                     return redirect('cart:index')
                 if user.groups.filter(name = 'usuarioCliente').exists():
                     return redirect('cart:cardprincipal')
-                print(user.email_user)
             
             else:
                 return render(request, 'registracion/login.html', {'error': 'Email o contraseña inválidos'})
