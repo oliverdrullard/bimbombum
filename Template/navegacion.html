@@ -5,7 +5,9 @@
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/static/administd/navegacion.css">
+    <link rel="stylesheet" href="/static/cabecera.css">
     <title>Document</title>
 </head>
 <body>
@@ -32,6 +34,8 @@
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'cart:agregar_producto'%}">Agregar producto</a></li>
                   <li><a class="dropdown-item" href="{% url 'cart:lista_producto'%}">Lista de productos</a></li>
+                  <li><a class="dropdown-item" href="#">Pedidos</a></li>
+                  <li><a class="dropdown-item" href="#">Articulos pedidos</a></li>
                   
                 </ul>
               </li>
@@ -43,7 +47,41 @@
             </form>
           </div>
         </div>
-        <p>nombre:{{ user.nombre }}</p>
+        <div class="usur-manager">
+          {% if user.is_authenticated %}
+                <ul class="menu-horisontal">
+                    <li>
+                        <a href="">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <ul class="menu-vertical">
+                            <li>
+                                <a href="#">{{ user.nombre }}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'cart:logout' %}">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="menu-horisontal">
+                    <li>
+                        <a href="">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <ul class="menu-vertical">
+                            <li>
+                                <a href="{% url 'cart:registro' %}">Crear cuenta</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'cart:login'%}">Iniciar sesion</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            {% endif%}
+        </div>
       </nav>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
