@@ -371,7 +371,7 @@ class agregar_producto_view(View):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('agregar_producto')
+            return redirect('cart:agregar_producto')
         return render(request, 'manegador/agregar_producto.html', {'form': form})
 
 
