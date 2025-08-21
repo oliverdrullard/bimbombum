@@ -136,7 +136,7 @@ class ResultadosBusquedaView(TemplateView):
     template_name = 'pantallas_usuarios/resultado_busqueda.html'
     
 
-@method_decorator(user_passes_test(clientes), name='dispatch')
+# @method_decorator(user_passes_test(clientes), name='dispatch')
 class lista_megusta_view(LoginRequiredMixin, View):
    login_url = 'cart:login'
    def get(self, request):
@@ -145,7 +145,7 @@ class lista_megusta_view(LoginRequiredMixin, View):
         
         return render(request, 'pantallas_usuarios/lista_megusta.html', {'productos': productos})
    
-@method_decorator(user_passes_test(clientes), name='dispatch')
+# @method_decorator(user_passes_test(clientes), name='dispatch')
 class agregar_a_lista_megusta(LoginRequiredMixin, View):
     login_url = 'cart:login'
     def post(self, request, producto_id):
@@ -156,7 +156,7 @@ class agregar_a_lista_megusta(LoginRequiredMixin, View):
         
         return redirect('cart:lista_megusta')
     
-@method_decorator(user_passes_test(clientes), name='dispatch')
+# @method_decorator(user_passes_test(clientes), name='dispatch')
 class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
     def post(self, request, producto_id):
         favorito = lista_megusta.objects.get(usuario=request.user,producto_id=producto_id)
@@ -164,7 +164,7 @@ class eliminar_producto_lista_megusta(LoginRequiredMixin, View):
 
         return redirect('cart:lista_megusta')
 
-@method_decorator(user_passes_test(clientes), name='dispatch')
+# @method_decorator(user_passes_test(clientes), name='dispatch')
 class carrito_view(View):
     def get(self, request):
         cart = Cart(request)
@@ -206,12 +206,12 @@ def ver_carrito(request):
     print("Contenido del carrito en  la sesion:", request.session.get('carrito'))
     return render(request, 'pantallas_usuarios/carrito.html', {'cart':cart})
 
-@method_decorator(user_passes_test(clientes), name='dispatch')
+# @method_decorator(user_passes_test(clientes), name='dispatch')
 class pantallaMensajes_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/pantallaMensajes.html')
 
-@method_decorator(user_passes_test(clientes), name='dispatch')
+# @method_decorator(user_passes_test(clientes), name='dispatch')
 class quienes_somos_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/quienes_somos.html')
@@ -269,7 +269,7 @@ class Estado_pedivo_view(View):
         return render(request,'pantallas_usuarios/estado_pedidos.html',{
             'pedidos_info':pedidos_info
         })
-@method_decorator(user_passes_test(clientes), name='dispatch')   
+@method_decorator(user_passes_test(clientes), name='dispatch') 
 class Confirmar_pedido(View):
     def get(self, request):
         carrito = request.session.get('carrito',{})
