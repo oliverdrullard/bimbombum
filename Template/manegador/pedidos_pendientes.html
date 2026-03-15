@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+{% load static%}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de productos</title>
+    <link rel="stylesheet" href="/static/administd/lista_producto.css">
+    
+
+    <h1>Pedidos pendientes</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Nombre</th>
+                    <th>Artículos</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for pedido in Pedidos %}
+                <tr>
+                    <td>{{ pedido.numero_orden }}</td>
+                    <td>{{ pedido.cliente }}</td>
+                    <td>{{ pedido.cantidad_articulos }}</td>
+                    <td>{{ pedido.fecha }}</td>
+                    <td>
+                        <button>Preparar pedido</button>
+                        
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">No hay pedidos</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
+    

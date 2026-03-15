@@ -25,6 +25,7 @@ from .models import DetallePedido
 from .models import DatosEnvio
 from .models import Pedido
 from .carrito import Cart
+from django.db.models import Sum
 from .decoradores import manegador,clientes
 
 # registro de usuarios
@@ -381,3 +382,28 @@ class lista_producto_view(View):
     def get(self, request):
         productos = Producto.objects.filter(activo=True)
         return render(request, 'manegador/lista_producto.html', {'productos': productos})
+
+class Pedidos_pendientes(View):
+    def get(self, request):
+
+        pedidos = Pedido.objects.all().select_related('idusuario')
+
+        pedidos_info = []
+
+        for pedido in pedidos:
+            cantidad_articulos = DetallePedido.objects.filter(
+                pedido=pedido
+            ).aggregate(total=Sum('cantidad'))['total'] or 0
+
+            pedidos_info.append({
+                'numero_orden': pedido.numero_pedidos,
+                'cliente':pedido.idusuario.nombre,
+                'cantidad_articulos':cantidad_articulos,
+                'fecha':pedido.fecha_pedido,
+            })
+
+        return render(request, 'manegador/pedidos_pendientes.html',{
+            'Pedidos': pedidos_info
+        })
+    
+    
