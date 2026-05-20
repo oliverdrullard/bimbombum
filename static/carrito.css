@@ -171,4 +171,18 @@ span > img{
   margin-bottom: 20px;
 
 }
+.comprar_todo{
+  width: 200px;
+  height: 40px;
+  border-radius: 50px;
+  border: none;
+  color: #fff;
+  background-color: #000;
+  font-size: 20px;
+}
+.comprar_todo > i{
+  margin-left: 10px;
+  color: #fff;
+  
+}
 
