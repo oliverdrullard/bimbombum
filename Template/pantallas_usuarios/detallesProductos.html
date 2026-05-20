@@ -28,6 +28,7 @@
                         <li>{{producto.material}}.</li>
                     </ul>
                     <div class="div-botones">
+                        
                         <form method="POST" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
                             {% csrf_token %}
                             <div class="div-cantidad">
@@ -35,6 +36,8 @@
                             </div>
                             <button type="submit" class="boton-carrito">Añadir al carrito</button>
                         </form>
+
+                        
                     </div>
                     <form method="POST" action="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}">
                         {% csrf_token %}
