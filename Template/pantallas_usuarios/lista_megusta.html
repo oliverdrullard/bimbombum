@@ -24,7 +24,13 @@
                 <div class="precio">
                     <p><strong>${{ producto.precio }}</strong></p>
                     <div class="iconos_megusta">
-                        <i class="fa-solid fa-cart-shopping " id="carito"></i>
+                        <form method="POST" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
+                            {% csrf_token%}
+                            <button title="Añadir al carrito" type="submit" class="boton-lista-megusta">
+                                <i class="fa-solid fa-cart-shopping " id="carito"></i>
+                            </button>
+                        </form>
+                        <!-- <i class="fa-solid fa-cart-shopping " id="carito"></i> -->
                         <i class="fa-solid fa-heart" id="corazon"></i>
                     </div>
                 </div>
@@ -32,7 +38,12 @@
                     {{ producto.descripcion}} 
                 </p>
                 <div class="div_botones_padre">
-                    <button class="botodes_lista_megusta">Comprar</button>
+                    <a href="{% url 'cart:Confirmar_pedido' producto.id_producto%}">
+                        <button class="botodes_lista_megusta" value="decrement" name="action">Comprar
+                            <!-- <i class="fas fa-credit-card"></i>Comprar -->
+                        </button>
+                    </a>
+                    <!-- <button class="botodes_lista_megusta">Comprar</button> -->
                     <form method="POST" action="{% url 'cart:eliminar_producto_lista_megusta' producto.id_producto %}">
                         {% csrf_token %}
                         <button type="submit" class="botodes_lista_megusta">Eliminar</button>
