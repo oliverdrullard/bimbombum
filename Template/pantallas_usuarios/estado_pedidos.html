@@ -1,5 +1,6 @@
 {% extends "app.html"%}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
     <link rel="stylesheet" href="/static/estado_pedido.css">
@@ -54,8 +55,8 @@
                 <p><strong>Producto {{ forloop.counter }}</strong></p>
                 <p><strong>Nombre:</strong> {{ detalle.producto.nombre }}</p>
                 <p><strong>Cantidad:</strong> {{ detalle.cantidad }}</p>
-                <p><strong>Precio por unidad:</strong> {{ detalle.precio_unitario }}</p>
-                <p><strong>Subtotal:</strong> {{ detalle.subtotal }}</p>
+                <p><strong>Precio por unidad:</strong> {{ detalle.precio_unitario|intcomma }}</p>
+                <p><strong>Subtotal:</strong> {{ detalle.subtotal|intcomma }}</p>
                 <hr>
             {% endfor%}
             </div>
@@ -69,7 +70,7 @@
             {% endif %}
             </div>
             <div class="total-pedido">
-                <p>&#128176;<strong>Total del pedido: {{ pedido_info.total}} </strong></p>
+                <p>&#128176;<strong>Total del pedido: {{ pedido_info.total|intcomma}} </strong></p>
             </div>
             <div class="notificaciones">
                 <input type="checkbox">

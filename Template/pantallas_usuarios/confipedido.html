@@ -1,5 +1,6 @@
 {% extends "app.html"%}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'confipedido.css' %}">
@@ -61,8 +62,8 @@
                         </div>
                         <div class="div-informacion-producto">
                             <p><strong>{{ item.producto.nombre }}</strong></p>
-                            <p>Precio: ${{ item.producto.precio }}</p>
-                            <p>Subtotal: ${{ item.subtotal }}</p>
+                            <p>Precio: ${{ item.producto.precio|intcomma }}</p>
+                            <p>Subtotal: ${{ item.subtotal|intcomma }}</p>
 
                             
                         </div>
@@ -73,7 +74,7 @@
             
         </div>
         <div class="div-boton-confi-total">
-            <p class=""><strong>Total: ${{ total }}</strong> </p>
+            <p class=""><strong>Total: ${{ total|intcomma }}</strong> </p>
             <button form="pedido" type="submit" class="boton-confirma-pedido"> Confirmar </button>
         </div>
         
