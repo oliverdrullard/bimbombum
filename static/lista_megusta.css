@@ -79,6 +79,13 @@
 }
 
 .iconos_megusta{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+.boton-lista-megusta{
+  border: none;
   margin-right: 10px;
 }
 
@@ -92,9 +99,10 @@
 }
 
 .div_botones_padre{
+  width: 100%;
   display: flex;
-  text-align: center;
-  justify-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .botodes_lista_megusta{
