@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% load static%}
+
+{% block content %}
+    <h2>Detalles del Pedido #{{ pedido.numero_pedidos }}</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Artículo</th>
+                <th>Código</th>
+                <th>Cantidad</th>
+                <th>Buscado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in detalles %}
+            <tr>
+                <td>{{ d.producto.nombre }}</td>
+                <td>{{ d.producto.id_producto }}</td>
+                <td>{{ d.cantidad }}</td>
+                <td>
+                    <form method="post" action="{% url 'cart:actualizar_buscado' d.id %}">
+                        {% csrf_token %}
+                        <input type="checkbox" name="buscado" onchange="this.form.submit()" {% if d.buscado %}checked{% endif %}>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

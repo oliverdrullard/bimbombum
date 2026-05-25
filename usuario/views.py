@@ -217,9 +217,9 @@ class quienes_somos_view(View):
     def get(self, request):
         return render(request, 'pantallas_usuarios/quienes_somos.html')
     
-@method_decorator(user_passes_test(clientes), name='dispatch')
-class Estado_pedivo_view(View):
-     
+# @method_decorator(user_passes_test(clientes), name='dispatch')
+class Estado_pedivo_view(LoginRequiredMixin, View):
+     login_url = 'cart:login'
      ESTADO_PROGRESO = {
     'recibido': 1,
     'preparando': 2,
@@ -270,35 +270,54 @@ class Estado_pedivo_view(View):
         return render(request,'pantallas_usuarios/estado_pedidos.html',{
             'pedidos_info':pedidos_info
         })
-@method_decorator(user_passes_test(clientes), name='dispatch') 
-class Confirmar_pedido(View):
-    def get(self, request):
+     
+# @method_decorator(user_passes_test(clientes), name='dispatch') 
+class Confirmar_pedido(LoginRequiredMixin, View):
+    login_url = 'cart:login'
+    def get(self, request,producto_id=None):
         carrito = request.session.get('carrito',{})
-        productos_ids = carrito.keys()
-        productos_db = Producto.objects.filter(id_producto__in=productos_ids)
 
         productos = []
         total = 0
-
-        for producto in productos_db:
-            produc = carrito.get(str(producto.id_producto), 0 )
-            cantidad = produc.get('cantidad', 0)
+        if producto_id:
+            producto = get_object_or_404(Producto,id_producto=producto_id)
+            item =  carrito.get(str(producto.id_producto),{})
+            cantidad= item.get('cantidad',0)
             subtotal = producto.precio * cantidad
-            total += subtotal
+            total = subtotal
+
             productos.append({
-                'producto': producto,
-                'cantidad': cantidad,
-                'subtotal': subtotal
+                'producto':producto,
+                'cantidad':cantidad,
+                'subtotal':subtotal
+
             })
+        else:
+            productos_ids = carrito.keys()
+            productos_db = Producto.objects.filter(id_producto__in=productos_ids)
+
+            for producto in productos_db:
+                item = carrito.get(str(producto.id_producto), {})
+                cantidad = item.get('cantidad', 0)
+
+                subtotal = producto.precio * cantidad
+                total += subtotal
+
+                productos.append({
+                    'producto': producto,
+                    'cantidad': cantidad,
+                    'subtotal': subtotal
+                })
 
         form = DatosEnviadosForm()
         return render(request, 'pantallas_usuarios/confipedido.html', {
             'form': form,
             'productos': productos,
             'total': total,
+            'producto_id': producto_id
         })
 
-    def post(self, request):
+    def post(self, request, producto_id=None):
         carrito = request.session.get('carrito',{})
         form = DatosEnviadosForm(request.POST)
 
@@ -313,26 +332,41 @@ class Confirmar_pedido(View):
             datos_envio.pedido = pedido
             datos_envio.save()
 
-
-            productos_db = Producto.objects.filter(id_producto__in=carrito.keys())
-
-            for producto in productos_db:
-                item = carrito.get(str(producto.id_producto), 0)
+            if producto_id:
+                producto = get_object_or_404(Producto,id_producto=producto_id)
+                item = carrito.get(str(producto.id_producto),{})
                 cantidad = item.get('cantidad',0)
-                # precio = item.get('precio',producto.precio)
 
                 DetallePedido.objects.create(
                     pedido = pedido,
                     producto = producto,
                     cantidad = cantidad,
-                    precio_unitario = producto.precio
+                    precio_unitario=producto.precio
                 )
+                carrito.pop(str(producto.id_producto),None)
+                request.session['carrito'] = carrito
+
+            else:
+
+                productos_db = Producto.objects.filter(id_producto__in=carrito.keys())
+
+                for producto in productos_db:
+                    item = carrito.get(str(producto.id_producto), 0)
+                    cantidad = item.get('cantidad',0)
+                    # precio = item.get('precio',producto.precio)
+
+                    DetallePedido.objects.create(
+                        pedido = pedido,
+                        producto = producto,
+                        cantidad = cantidad,
+                        precio_unitario = producto.precio
+                    )
             
-            request.session.pop('carrito', None)
+                request.session.pop('carrito', None)
             return redirect('cart:estado_pedidos')
         
         productos_ids = carrito.keys()
-        productos_db = Producto.objects.filter(id_prodcuto__in=productos_ids)
+        productos_db = Producto.objects.filter(id_producto__in=productos_ids)
 
         productos = []
         total = 0
@@ -405,5 +439,16 @@ class Pedidos_pendientes(View):
         return render(request, 'manegador/pedidos_pendientes.html',{
             'Pedidos': pedidos_info
         })
-    
-    
+class Articulos_pedidos(View):
+    def get(self, request, pedido_id):
+        pedido = get_object_or_404(Pedido, id_pedido=pedido_id)
+
+        detalles = DetallePedido.objects.filter(
+            pedido=pedido
+        ).select_related('producto')
+
+        return render(request, 'manegador/detalles_pedido_manager.html', {
+            'pedido': pedido,
+            'detalles': detalles
+        })
+        
