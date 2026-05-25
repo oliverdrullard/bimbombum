@@ -47,6 +47,16 @@
                                     <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
                                 </div>
                             {% endfor %}
+                            
+                                <!-- Bloque para la validacion de el metodo de pago -->
+                            {% if form.forma_pago.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.forma_pago.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
                         </div>
                     </form>
                 </div>
