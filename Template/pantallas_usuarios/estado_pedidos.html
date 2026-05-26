@@ -48,15 +48,24 @@
                 <p> Fecha del pedido: {{ pedido_info.pedido.fecha_pedido }}</p>
                 <p> Fecha de entrega: {{ pedido_info.pedido.fecha_entrega }}</p>
                 <p>{{ pedido_info.pedido.forma_pago }}</p>
+                
             </div>
             <div class="informacion-prodcuto info">
                 <h4>&#128230; Productos comprados</h4>
             {% for detalle in pedido_info.detalles %}
-                <p><strong>Producto {{ forloop.counter }}</strong></p>
-                <p><strong>Nombre:</strong> {{ detalle.producto.nombre }}</p>
-                <p><strong>Cantidad:</strong> {{ detalle.cantidad }}</p>
-                <p><strong>Precio por unidad:</strong> {{ detalle.precio_unitario|intcomma }}</p>
-                <p><strong>Subtotal:</strong> {{ detalle.subtotal|intcomma }}</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr;">
+                   <div>
+                        <p><strong>Producto {{ forloop.counter }}</strong></p>
+                        <p><strong>Nombre:</strong> {{ detalle.producto.nombre }}</p>
+                        <p><strong>Cantidad:</strong> {{ detalle.cantidad }}</p>
+                        <p><strong>Precio por unidad:</strong> {{ detalle.precio_unitario|intcomma }}</p>
+                        <p><strong>Subtotal:</strong> {{ detalle.subtotal|intcomma }}</p>
+                   </div>
+                    <div>
+                        <img src="{{ detalle.producto.imagen.url }}" alt="{{ detalle.producto.nombre }}" width="150">
+                    </div>
+                </div>
+                <!-- <img src="{{ detalle.producto.imagen.url }}" alt="{{ detalle.producto.nombre }}" width="150"> -->
                 <hr>
             {% endfor%}
             </div>
