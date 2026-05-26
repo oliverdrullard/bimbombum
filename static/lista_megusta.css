@@ -42,6 +42,10 @@
   margin-left: 20px;
   border-radius: 20px;
   overflow: hidden;
+
+  display: flex;               
+  flex-direction: column;       
+  
 }
 
 /* estilos para el contenedor que la imagen  y la imagen*/
@@ -100,9 +104,11 @@
 
 .div_botones_padre{
   width: 100%;
+  margin-top: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .botodes_lista_megusta{
