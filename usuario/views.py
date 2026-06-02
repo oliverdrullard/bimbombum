@@ -10,6 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.models import Group
+# from django.http import HttpResponse
+from django.http import JsonResponse
 # Esto es utilizado para manejar erros si no parese lo que busca la funcion
 from django.shortcuts import get_object_or_404
 from .models import ModeloUsuario
@@ -27,6 +29,7 @@ from .models import Pedido
 from .carrito import Cart
 from django.db.models import Sum
 from .decoradores import manegador,clientes
+
 
 # registro de usuarios
 class UsuarioRegistro(View):
@@ -150,12 +153,19 @@ class lista_megusta_view(LoginRequiredMixin, View):
 class agregar_a_lista_megusta(LoginRequiredMixin, View):
     login_url = 'cart:login'
     def post(self, request, producto_id):
+       
         producto = Producto.objects.get(id_producto=producto_id)
 
         if not lista_megusta.objects.filter(usuario=request.user, producto=producto).exists():
-            lista_megusta.objects.create(usuario=request.user, producto=producto)
+
+            lista_megusta.objects.create(usuario=request.user,producto=producto)
+
+            # messages.success(request,"Producto agregado a lista de megusta.")
+
+            return JsonResponse({'status':'success','message':'Producto agregado lista de megusta.'})
         
-        return redirect('cart:lista_megusta')
+        else:
+            return JsonResponse({"status":"info","message":"El producto ya esta en la lista de megusta."})
     
 # @method_decorator(user_passes_test(clientes), name='dispatch')
 class eliminar_producto_lista_megusta(LoginRequiredMixin, View):

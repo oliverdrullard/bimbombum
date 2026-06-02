@@ -9,7 +9,13 @@ body{
     padding-bottom: 50px;
     min-height: 100vh;
     
-    
-
 }
 
+.toast-popup{
+    border-radius: 16px !important;
+    background: #111827 !important;
+    color: #fff !important;
+    padding: 12px !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}

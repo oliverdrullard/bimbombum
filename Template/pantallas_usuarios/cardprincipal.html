@@ -28,13 +28,13 @@
                         <h5 class="nombre_articulo">{{ producto.nombre }}</h5>
                         <p class="precio">$ {{ producto.precio|intcomma  }}</p>
                         <div class="inform">
-                            <form method="POST" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
+                            <form method="post" action="{% url 'cart:agregar_al_carrito' producto.id_producto %}">
                                 {% csrf_token%}
                                 <button type="submit" class="boton-lista-megusta">
                                     <i class="fa-solid fa-cart-shopping " id="carito"></i>
                                 </button>
                             </form>
-                            <form method="POST" action="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}">
+                            <form hx-post="{% url 'cart:agregar_a_lista_me_gusta' producto.id_producto %}" hx-trigger="submit"  hx-swap="none">
                                 {% csrf_token%}
                                 <button type="submit" class="boton-lista-megusta">
                                     <i class="fa-solid fa-heart" id="corazon"></i>

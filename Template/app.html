@@ -20,5 +20,36 @@
 
         {% include "pie.html" %}
     </div> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <script>
+        document.body.addEventListener('htmx:afterRequest', function(event) {
+
+            try {
+
+                const response = JSON.parse(event.detail.xhr.response);
+
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: response.status,
+                    title: response.message,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    //timerProgressBar: true,
+                    
+                    customClass: {
+                        popup: 'toast-popup'
+                    }
+                });
+
+            } catch (ex) {
+                console.log("No era JSON", ex);
+            }
+
+        });
+    </script>
 </body>
+
 </html>
