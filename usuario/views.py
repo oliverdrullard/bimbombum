@@ -204,7 +204,7 @@ def agregar_al_carrito(request, producto_id):
         if cantidad_solicitada <= producto.stock:
             cart.add(producto=producto, cantidad=cantidad_solicitada)
 
-    return redirect('cart:ver_carrito')
+    return JsonResponse({"status":"success", "message":"Producto agregado al carrito"})
 
 def eliminar_del_carrito(request, producto_id):
     cart = Cart(request)
